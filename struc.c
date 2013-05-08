@@ -14,15 +14,6 @@ struct L_Cases
 
 typedef struct L_Cases L_Cases;
 
-
-struct L_Candidats
-{
-	int 			nombre;
-	struct L_Candidats *	suivant;
-};
-
-typedef struct L_Candidats L_Candidats;
-
 int Grille[9][9];
 
 L_Candidats LC[9][9];
