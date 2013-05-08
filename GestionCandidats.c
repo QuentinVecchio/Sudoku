@@ -13,6 +13,16 @@ Liste creer_element(int elt)
 	return L;
 }
 
+void affiche_liste(Liste L)
+{
+	if(L != NULL)
+	{
+		printf("%d ", L->courant);
+		if(L->suivant != NULL)	affiche_liste(L->suivant);
+		else printf("\n");
+	}
+}
+
 void ajout_element(Liste L, int elt)
 {
 	if(L != NULL)
@@ -82,16 +92,6 @@ int appartient_liste(Liste L, int elt)
 		// si il existe un suivant et que l'élément est plus petit (si plus grand alors élément n'existe pas
 		else if(L->suivant != NULL && L->suivant->courant <= elt) return appartient_liste(L->suivant, elt);
 		else return 0;	
-	}
-}
-
-void affiche_liste(Liste L)
-{
-	if(L != NULL)
-	{
-		printf("%d ", L->courant);
-		if(L->suivant != NULL)	affiche_liste(L->suivant);
-		else printf("\n");
 	}
 }
 
