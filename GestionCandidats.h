@@ -42,3 +42,8 @@ void supprimer_element(Liste L, int elt);
  */
 int appartient_liste(Liste L, int elt);
 
+/*
+ * 	Renvoit la longueur de la chaine
+ */
+int longueur_liste(Liste L);
+

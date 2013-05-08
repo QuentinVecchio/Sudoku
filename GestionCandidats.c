@@ -94,3 +94,19 @@ void affiche_liste(Liste L)
 		else printf("\n");
 	}
 }
+
+int longueur_liste(Liste L)
+{
+	int l = 0;
+	
+	if(L != NULL)
+	{
+		while(L)
+		{
+			l++;
+			L = L->suivant;
+		}		
+	}
+
+	return l;
+}
