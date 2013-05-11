@@ -16,7 +16,7 @@ typedef struct L_Cases L_Cases;
 
 int Grille[9][9];
 
-L_Candidats LC[9][9];
+//L_Candidats LC[9][9];
 
 struct L_Case
 {
