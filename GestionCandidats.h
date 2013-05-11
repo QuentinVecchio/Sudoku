@@ -2,7 +2,7 @@
  * 	Gestion de la liste chaînée représentant les candidats d'un case donnée.
  * 	Les éléments sont rangés dans l'ordre croissant
  * 
- * 	@autor Mattthieu Clin
+ * 	@author Mattthieu Clin
  * 	@version 1.0.0
  * 	@date 08/05/2013
  * 
