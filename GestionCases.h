@@ -26,3 +26,7 @@ L_Cases creer_liste(T_Case elt);
 void affiche_liste(L_Cases L);
 
 void ajout_element(L_Cases L, T_Case elt);
+
+void eleve_element(L_Cases L, T_Case elt);
+
+int est_egal(T_Case a, T_Case b);
