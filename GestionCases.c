@@ -59,23 +59,23 @@ int est_egal(T_Case a, T_Case b)
 	return (a.ligne == b.ligne && a.colonne == b.colonne);
 }
 
-main()
-{
-		T_Case c;
-		c.ligne = 5;
-		c.colonne =8;
-		L_Cases a = NULL;
-		a = creer_liste(c);
-
-		ajout_element(a, (T_Case){0,5});
-		ajout_element(a, (T_Case){0,6});
-		ajout_element(a, (T_Case){0,7});
-		ajout_element(a, (T_Case){1,2});
-		ajout_element(a, (T_Case){1,3});
-		ajout_element(a, (T_Case){1,4});
-		ajout_element(a, (T_Case){1,6});
-		eleve_element(a, (T_Case){1,6});
-		
-		printf("affiche\n");
-		affiche_liste(a);
-}
+// main()
+// {
+// 		T_Case c;
+// 		c.ligne = 5;
+// 		c.colonne =8;
+// 		L_Cases a = NULL;
+// 		a = creer_liste(c);
+// 
+// 		ajout_element(a, (T_Case){0,5});
+// 		ajout_element(a, (T_Case){0,6});
+// 		ajout_element(a, (T_Case){0,7});
+// 		ajout_element(a, (T_Case){1,2});
+// 		ajout_element(a, (T_Case){1,3});
+// 		ajout_element(a, (T_Case){1,4});
+// 		ajout_element(a, (T_Case){1,6});
+// 		eleve_element(a, (T_Case){1,6});
+// 		
+// 		printf("affiche\n");
+// 		affiche_liste(a);
+// }

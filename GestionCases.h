@@ -21,12 +21,31 @@ typedef struct cases
 
 typedef Cases* L_Cases;
 
+/*
+ * 	Permet de creer une liste contenant un élément
+ */
 L_Cases creer_liste(T_Case elt);
 
+/*
+ * 	Affiche les éléments de la liste
+ */
 void affiche_liste(L_Cases L);
 
+/*
+ * 	Ajoute un élément en fin de liste
+ */
 void ajout_element(L_Cases L, T_Case elt);
 
+/*
+ *	Enlève un élément de la liste
+ */ 
 void eleve_element(L_Cases L, T_Case elt);
 
+/*
+ * 	Compare deux cases, renvoit 1 si égal, 0 sinon
+ */
 int est_egal(T_Case a, T_Case b);
+
+
+
+
