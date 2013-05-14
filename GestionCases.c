@@ -17,6 +17,11 @@ L_Cases creer_liste(T_Case elt)
 	return L;
 }
 
+int est_vide(L_Cases L)
+{
+	return (L==NULL);
+}
+
 void affiche_liste(L_Cases L)
 {
 	L_Cases it;
@@ -72,6 +77,10 @@ main()
 		L_Cases a = NULL;
 		a = creer_liste(c);
 
+		L_Cases b = creer_liste_vide();
+		if(est_vide(b)) printf("est vide !\n");
+		else printf("pas vide\n");
+		
 		ajout_element(a, (T_Case){0,5});
 		ajout_element(a, (T_Case){0,6});
 		ajout_element(a, (T_Case){0,7});
