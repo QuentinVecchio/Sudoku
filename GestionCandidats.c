@@ -110,3 +110,8 @@ int longueur_liste(Liste L)
 
 	return l;
 }
+
+main()
+{
+		return 1;
+}

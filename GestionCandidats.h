@@ -15,35 +15,35 @@ typedef struct candidat
 	struct candidat * suivant;
 } Candidat;
 
-typedef Candidat * L_Candidats;
+typedef Candidat * Liste;
 
 /*
  * 	Creer une liste contenant un seul élément
  */
-L_Candidats creer_element(int elt);
+Liste creer_element(int elt);
 
 /*
  * Affiche l'ensemble des candidats 
  */
-void affiche_liste(L_Candidats L);
+void affiche_liste(Liste L);
 
 /*
  * 	Ajout un élément dans la liste dans l'ordre croissant
  */
-void ajout_element(L_Candidats L, int elt);
+void ajout_element(Liste L, int elt);
 
 /*
  * 	Supprime l'élément de la liste
  */
-void supprimer_element(L_Candidats L, int elt);
+void supprimer_element(Liste L, int elt);
 
 /*
  * 	Renvoit 1 si l'élément appartient à la liste, 0 sinon
  */
-int appartient_liste(L_Candidats L, int elt);
+int appartient_liste(Liste L, int elt);
 
 /*
  * 	Renvoit la longueur de la chaine
  */
-int longueur_liste(L_Candidats L);
+int longueur_liste(Liste L);
 
