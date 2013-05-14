@@ -21,6 +21,9 @@ typedef struct cases
 
 typedef Cases* L_Cases;
 
+
+L_Cases creer_liste_vide();
+
 /*
  * 	Permet de creer une liste contenant un élément
  */
