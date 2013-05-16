@@ -3,8 +3,8 @@
  * 	Les éléments sont rangés dans l'ordre croissant
  * 
  * 	@author Mattthieu Clin
- * 	@version 1.0.0
- * 	@date 08/05/2013
+ * 	@version 1.0.1
+ * 	@date 16/05/2013
  * 
  */
 
