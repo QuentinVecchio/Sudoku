@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "struc.c"
-#include "GestionCandidats.h"
+#include "../src/GestionCandidats.h"
+#include "../src/struc.c"
 main()
 {
 	printf("Bienvenue dans le logiciel de résolution de sudoku\n");
-	Liste LC[9][9];
+	L_Candidats LC[9][9];
 }
