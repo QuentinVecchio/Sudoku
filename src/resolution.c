@@ -1,6 +1,7 @@
 /*
-* Fonction pour projet C Quentin Vecchio
-* Fonction Est_Candidat et Fermer_Case
+ 	CODE SOURCE des fonctions de résolutions
+	QUENTIN VECCHIO
+	17 mai 2013
 */
 int Est_Candidat(int chiffre,T_Case Case , int grille[][])
 {
@@ -35,12 +36,17 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[][])
                 y -=3;
                 x++;
          }
-
 	return 1;
 }
 
 void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
 {
+/*
+	Fonction qui prend en paramètre le chiffre à mettre dans la case donnée. on passe également la grille qui sera modifié dans la fonction.
+	On appelle la fonction que quand on est sur de vouloir fermer la case, les vérifications ne sont donc pas obligatoire.
+	La fonction supprime d'abord de tous les listes candidats des cases de la ligne ainsi que de la colonne et de du carré de la case donné.
+	Enfin la fonction affecte à la case (via la grille) le chiffre donné.
+*/
 	int i;//Index de parcours
 	int x;//Index de parcours colonne
 	int y;//Index de parcours ligne
