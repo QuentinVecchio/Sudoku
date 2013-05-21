@@ -3,7 +3,8 @@
 	QUENTIN VECCHIO
 	17 mai 2013
 */
-#include "GestionCase.h"
+#include "GestionCases.h"
+#include "GestionCandidats.h"
 
 int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 {
@@ -20,14 +21,14 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 			return 0;
         }
         //On cherche le chiffre dans la colonne
-        for(i=0;i<9;i++)LO = creer_liste_vide;
+        for(i=0;i<9;i++)
         {
                 if(grille[Case.ligne][i] == chiffre)
 			return 0;
         }
 	//On cherche dans le carré
-	x = Case.ligne-Case.ligne%3;
-        y = Case.colonne-Case.colonne%3;
+	int x = Case.ligne-Case.ligne%3;
+        int y = Case.colonne-Case.colonne%3;
         while(x != x+3)
         {
         	while(y != y+3)
@@ -41,7 +42,7 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 	return 1;
 }
 
-void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
+void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9])
 {
 /*
 	Fonction qui prend en paramètre le chiffre à mettre dans la case donnée. on passe également la grille qui sera modifié dans la fonction.
@@ -49,6 +50,7 @@ void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
 	La fonction supprime d'abord de tous les listes candidats des cases de la ligne ainsi que de la colonne et de du carré de la case donné.
 	Enfin la fonction affecte à la case (via la grille) le chiffre donné.
 */
+
 	int i;//Index de parcours
 	int x;//Index de parcours colonne
 	int y;//Index de parcours ligne
@@ -56,9 +58,9 @@ void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
 		//Suppression dans la ligne
 		for(i=0;i<9;i++)
 		{
-			if(Est_Candidat(LC[Case.ligne][Case.colonne],chiffre))
+			if(appartient_liste(LC[Case.ligne][Case.colonne],chiffre))
 			{
-				supprimer_element(L_Candidats[i][Case.colonne],chiffre);
+				supprimer_element(LC[i][Case.colonne],chiffre);
 			}
 		}
 		//Suppression dans la colonne
@@ -66,7 +68,7 @@ void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
 		{
                         if(appartient_liste(LC[Case.ligne][Case.colonne],chiffre))
 			{
-				supprimer_element(L_Candidats[Case.ligne][i],chiffre);
+				supprimer_element(LC[Case.ligne][i],chiffre);
 			}
                 }
 		//Suppression dans le carré et dans la case
@@ -76,7 +78,7 @@ void Fermer_Case(int chiffre, int grille[][],T_Case Case, L_Candidats LC[][])
 		{
 			while(y != y+3)
 			{
-				supprimer_element(L_Candidats[x][y],chiffre);
+				supprimer_element(LC[x][y],chiffre);
 				y++;
 			}
 			y -=3;
