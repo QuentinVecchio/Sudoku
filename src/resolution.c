@@ -3,6 +3,8 @@
 	QUENTIN VECCHIO
 	17 mai 2013
 */
+#include "GestionCase.h"
+
 int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 {
 /*
@@ -18,7 +20,7 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 			return 0;
         }
         //On cherche le chiffre dans la colonne
-        for(i=0;i<9;i++)
+        for(i=0;i<9;i++)LO = creer_liste_vide;
         {
                 if(grille[Case.ligne][i] == chiffre)
 			return 0;
