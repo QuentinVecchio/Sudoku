@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include "GUI_Options.h"
+#include "gui_options.h"
 
 void options(GtkWidget *widget, gpointer data)
 {
@@ -20,31 +20,48 @@ void options(GtkWidget *widget, gpointer data)
 	GtkWidget * hBox1;
 	GtkWidget * label2;
 	GtkWidget * zoneSaisi2;
-	GtkWidget * btnEdit2
+	GtkWidget * btnEdit2;
 	GtkWidget * hBox2;
 	GtkWidget * label3;
-	GtkWidget * zoneSaisi2;
+	GtkWidget * zoneSaisi3;
 	GtkWidget * btnEdit3;
 	GtkWidget * hBox3;
-	GtkWidget * btnMenu;
-	GtkWidget * vBox;
 //Initialisation de la dialogBox
-        dialogBox = gtk_dialog_new_with_buttons("Options",GTK_WINDOW(widget), GTK_DIALOG_MODAL,NULL);
-	vBox =  
+        dialogBox = gtk_dialog_new_with_buttons("Options",GTK_WINDOW(widget), GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 //Initialisation de la première ligne d'options
-
+	label1 = gtk_label_new("Choisir un fichier de configuration");
+	hBox1 = gtk_hbox_new( FALSE, 10);
+	zoneSaisi1 = gtk_entry_new();
+	btnEdit1 = gtk_button_new_with_label("...");
+	gtk_box_pack_start(GTK_BOX(hBox1), zoneSaisi1, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(hBox1), btnEdit1, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label1, TRUE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), hBox1, TRUE, TRUE, 10);
 //Initialisation de la seconde ligne d'options
-
+	gchar * labelChoisirFichier = g_locale_to_utf8("Choisir un fichier par défaut",-1, NULL, NULL, NULL);//Permet de mettre un accent
+	label2 = gtk_label_new(labelChoisirFichier);
+	hBox2 = gtk_hbox_new(FALSE, 10);
+	zoneSaisi2 = gtk_entry_new();
+	btnEdit2 = gtk_button_new_with_label("...");
+	gtk_box_pack_start(GTK_BOX(hBox2), zoneSaisi2, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(hBox2), btnEdit2, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label2, TRUE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), hBox2, TRUE, TRUE, 10);
 //Initialisation de la troisième ligne d'options
-
-//Initialisation du bouton Retour Menu
+	label3 = gtk_label_new("Choisir une grille");
+	hBox3 = gtk_hbox_new(FALSE, 10);
+	zoneSaisi3 = gtk_entry_new();
+	btnEdit3 = gtk_button_new_with_label("...");
+	gtk_box_pack_start(GTK_BOX(hBox3), zoneSaisi3, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(hBox3), btnEdit3, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label3, TRUE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), hBox3, TRUE, TRUE, 10);
 //Lancement de la dialogBox
-        if(gtk_dialog_run (GTK_DIALOG(dialogBox)) == GTK_RESPONSE_ACCEPT)
+	gtk_widget_show_all(GTK_DIALOG(dialogBox)->vbox);
+        switch(gtk_dialog_run(GTK_DIALOG(dialogBox)))
         {
-                gchar * nomFichier = NULL;
-                nomFichier = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialogBox));
-                affiche(nomFichier);
+		case GTK_RESPONSE_OK :
+			gtk_widget_destroy(dialogBox);
         }
-        gtk_widget_destroy(dialogBox);
 }
 

@@ -5,6 +5,7 @@
 *       19 mai 2013
 *********************************************************************************************************************************************/
 void choisirFichier(GtkWidget *widget, gpointer data);
+void dialogBoxChoixFichier(GtkWidget *widget, gpointer data);
 void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv);
 
 

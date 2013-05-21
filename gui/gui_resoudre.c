@@ -11,29 +11,61 @@
 #include <SDL/SDL_ttf.h>
 #include <string.h>
 
-#include "GUI_Resoudre.h"
+#include "gui_resoudre.h"
 
 /*Variables globales */
 GtkWidget * dialogBox = NULL;
+gchar * lienFichier = NULL;
 /********************/
 void choisirFichier(GtkWidget *widget, gpointer data)
 {
-	int Niveau = 1;
-	int tpsExecution = 30;
-	int grilleD[9][9] = {0};
-	int grilleF[9][9] = {0};
-	dialogBox = gtk_file_chooser_dialog_new("Choisir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN ,GTK_RESPONSE_ACCEPT, NULL);
-	gtk_widget_set_size_request(dialogBox, 300,300);
-	if(gtk_dialog_run (GTK_DIALOG(dialogBox)) == GTK_RESPONSE_ACCEPT)
-	{
-		gchar * nomFichier = NULL;
-		nomFichier = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialogBox));
-		affiche(grilleD,grilleF,tpsExecution,Niveau);
+//Initialisation des variables test
+        int Niveau = 1;
+        int tpsExecution = 30;
+        int grilleD[9][9] = {0};
+        int grilleF[9][9] = {0};
+//Initialisation des variables
+        GtkWidget * label1;
+        GtkWidget * zoneSaisi1;
+        GtkWidget * btnEdit1;
+        GtkWidget * hBox1;
+//Initialisation de la dialogBox
+        dialogBox = gtk_dialog_new_with_buttons("Choisir un Sudoku",GTK_WINDOW(widget), GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+//Initialisation des widgets
+	label1 = gtk_label_new("Choisir un Sudoku");
+        hBox1 = gtk_hbox_new( FALSE, 10);
+        zoneSaisi1 = gtk_entry_new();
+        btnEdit1 = gtk_button_new_with_label("...");
+        g_signal_connect(G_OBJECT(btnEdit1),"clicked", G_CALLBACK(dialogBoxChoixFichier), NULL);
+	gtk_box_pack_start(GTK_BOX(hBox1), zoneSaisi1, FALSE, FALSE,10);
+        gtk_box_pack_start(GTK_BOX(hBox1), btnEdit1, FALSE, FALSE,10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label1, TRUE, TRUE, 10);
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), hBox1, TRUE, TRUE, 10);
+//Lancement de la dialogBox
+        gtk_widget_show_all(GTK_DIALOG(dialogBox)->vbox);
+        switch(gtk_dialog_run(GTK_DIALOG(dialogBox)))
+        {
+                case GTK_RESPONSE_OK :
+                	 affiche(grilleD,grilleF,tpsExecution,Niveau);
 	}
-	else
-	{
-		gtk_widget_destroy(dialogBox);
-	}
+}
+
+void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
+{
+//Initialisation de la fenetre
+	GtkWidget * dialogBoxChoix = NULL;
+        dialogBoxChoix = gtk_file_chooser_dialog_new("Choisir un fichier",NULL,GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN ,GTK_RESPONSE_ACCEPT, NULL);
+        gtk_widget_set_size_request(dialogBoxChoix, 300,300);
+        if(gtk_dialog_run (GTK_DIALOG(dialogBoxChoix)) == GTK_RESPONSE_ACCEPT)
+        {
+                lienFichier = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialogBoxChoix));
+		gtk_widget_destroy(dialogBoxChoix);
+        }
+        else
+        {
+                gtk_widget_destroy(dialogBoxChoix);
+        }
+
 }
 
 void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
