@@ -9,4 +9,4 @@
 
 #effacer les fichers '*.o'
 clean : 
-	rm -r */*.o; rm *.o; rm */TEST
+	rm -r */*.o; rm *.o; rm */a.out

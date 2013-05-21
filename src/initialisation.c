@@ -2,7 +2,7 @@
 
 #include "GestionCandidats.h"
 #include "GestionCases.h"
-//#include "resolution.h"
+#include "resolution.h"
 
 #include "initialisation.h"
 
@@ -20,7 +20,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 {
 	//SPECIFICATION
 	
-	T_Case index; //index de parcours du tableau 'LC'
+	int ligne, colonne; //index de parcours du tableau 'LC'
 	
 	int Grille[9][9]={0}; //tableau de valeur du fichier
 	int nb; //varis de 1 à 9 pour remplire la liste des candidats dans le tableau LC
@@ -48,25 +48,25 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 	
 	
 	
-	for(index.ligne = 0; index.ligne < 9; index.ligne ++)
+	for(ligne = 0; ligne < 9; ligne ++)
 	{
-		for(index.colonne = 0; index.colonne < 9; index.colonne ++)
+		for(colonne = 0; colonne < 9; colonne ++)
 		{
-			if(Grille[index.ligne][index.colonne] != 0) LC[index.ligne][index.colonne] = NULL;
+			if(Grille[ligne][colonne] != 0) LC[ligne][colonne] = NULL;
 			else
 			{
 				
 				for(nb = 1; nb <= 9; nb ++)
 				{
-					possible = Est_Candidat(nb, index, Grille);
+					possible = Est_Candidat(nb, (T_Case){ligne, colonne}, Grille);
 					if(possible)
 					{
-						//on ajout 'nb' a la liste des candidats!
+						ajout_element_Candidats(LC[ligne][colonne], nb);
 					}
 				}
 				
 				//on ajoute la case courrante a la liste des cases ouvert
-				ajout_element_Case(LO, index);
+				ajout_element_Case(LO, (T_Case){ligne, colonne});
 				
 			}
 		}

@@ -3,7 +3,7 @@
 #include "GestionCandidats.h"
 
 
-L_Candidats creer_element(int elt)
+L_Candidats  creer_element(int elt)
 {
 	L_Candidats L;
 	L= (L_Candidats) malloc(sizeof(Candidat));
@@ -54,6 +54,10 @@ void ajout_element_Candidats(L_Candidats L, int elt)
 			// Arrivé en fin de liste, on insère
 			else L->suivant = creer_element(elt);	
 		}
+	}
+	else
+	{
+		L = creer_element(elt);
 	}
 }
 
