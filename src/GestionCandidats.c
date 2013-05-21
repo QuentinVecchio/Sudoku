@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "GestionCandidats.h"
+
+
+L_Candidats  creer_element(int elt)
+{
+	L_Candidats L;
+	L= (L_Candidats) malloc(sizeof(Candidat));
+	L->courant = elt;
+	L->suivant = NULL;
+	
+	return L;
+}
+
+void affiche_liste_Candidats(L_Candidats L)
+{
+	if(L != NULL)
+	{
+		printf("%d ", L->courant);
+		if(L->suivant != NULL)	affiche_liste_Candidats(L->suivant);
+		else printf("\n");
+	}
+}
+
+void ajout_element_Candidats(L_Candidats L, int elt)
+{
+	if(L != NULL)
+	{
+		// Pour la tête de liste, insertion en tête de liste
+		if(L->courant > elt)
+		{
+			L_Candidats tmp;
+			tmp = (L_Candidats) malloc(sizeof(Candidat));
+			tmp->suivant = L->suivant;
+			tmp->courant = L->courant;
+			L->courant = elt;
+			L->suivant = tmp;
+		}
+		else
+		{
+			if(L->suivant != NULL)
+			{
+				// Si le suivant est plus grand, on insère avant
+				if(L->suivant->courant > elt)
+				{
+					L_Candidats tmp = creer_element(elt);
+					tmp->suivant = L->suivant;
+					L->suivant = tmp;
+				}
+				// Element suivant de la chaîne
+				else ajout_element_Candidats(L->suivant, elt);
+			}
+			// Arrivé en fin de liste, on insère
+			else L->suivant = creer_element(elt);	
+		}
+	}
+	else
+	{
+		L = creer_element(elt);
+	}
+}
+
+void supprimer_element(L_Candidats L, int elt)
+{
+	if(L != NULL)
+	{
+		// Pour la tête de liste
+		if(L->courant == elt)
+		{
+			L_Candidats tmp = L->suivant;
+			L->courant = tmp->courant;
+			L->suivant = tmp->suivant;	
+			free(tmp);
+		}
+		else if(L->suivant != NULL)
+		{
+			//Si c'est élément suivant, on le supprime
+			if(L->suivant->courant == elt)
+			{
+				L_Candidats tmp = L->suivant;
+				L->suivant = tmp->suivant;
+				free(tmp);
+			}
+			// test du prochain élément, si > elt alors l'elt a supprimer n'existe pas
+			else if(L->suivant->courant <= elt)	supprimer_element(L->suivant, elt);
+		}
+	}
+}
+
+int appartient_liste(L_Candidats L, int elt)
+{
+	if(L != NULL)
+	{
+		if(L->courant == elt) return 1;
+		// si il existe un suivant et que l'élément est plus petit (si plus grand alors élément n'existe pas
+		else if(L->suivant != NULL && L->suivant->courant <= elt) return appartient_liste(L->suivant, elt);
+		else return 0;	
+	}
+}
+
+int longueur_liste(L_Candidats L)
+{
+	int l = 0;
+	
+	if(L != NULL)
+	{
+		while(L)
+		{
+			l++;
+			L = L->suivant;
+		}		
+	}
+
+	return l;
+}
