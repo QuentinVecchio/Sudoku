@@ -76,7 +76,19 @@ void Init_Data(L_Candidats  LC[9][9], T_Case LO)
 /*
  * une fonction qui retourne un tableau de valeur correspondant au fichier txt fourni
  */
-void lireGrille(int Grille[9][9])
+void lireGrille(int Grille[9][9],char lien[])
 {
-	//Fonction écrit par Cindy!!!
+	FILE *f=NULL;
+	int ligne,colonne;
+	f=fopen(lien,"r");
+	if (f!=NULL)
+	{
+		while (fscanf(f,"%d %d %d",&ligne,&colonne,&Grille[ligne][colonne])!=EOF);
+		
+	}
+	else
+	{printf("Le fichier n'existe pas");
+	}
 }
+
+
