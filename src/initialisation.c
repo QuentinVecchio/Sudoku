@@ -2,6 +2,7 @@
 
 #include "GestionCandidats.h"
 #include "GestionCases.h"
+//#include "resolution.h"
 
 #include "initialisation.h"
 
@@ -15,7 +16,7 @@ main()
 /*
  * @param: LC est un tableau [9][9] qui contient soit NULL soit une liste de candidats
  */
-void Init_Data(L_Candidats  LC[9][9])
+void Init_Data(L_Candidats  LC[9][9], T_Case LO)
 {
 	//SPECIFICATION
 	
@@ -26,7 +27,7 @@ void Init_Data(L_Candidats  LC[9][9])
 	
 	int possible = 0; //booleen qui défini si 'nb' est un candidat possible pour la case LC[][]
 	
-	
+	LO = creer_liste_vide;
 	
 	//CORPS
 	
@@ -53,6 +54,7 @@ void Init_Data(L_Candidats  LC[9][9])
 			if(Grille[index.ligne][index.colonne] != 0) LC[index.ligne][index.colonne] = NULL;
 			else
 			{
+				
 				for(nb = 1; nb <= 9; nb ++)
 				{
 					possible = Est_Candidat(nb, index, Grille);
@@ -61,6 +63,10 @@ void Init_Data(L_Candidats  LC[9][9])
 						//on ajout 'nb' a la liste des candidats!
 					}
 				}
+				
+				//on ajoute la case courrante a la liste des cases ouvert
+				ajout_element_Case(LO, index);
+				
 			}
 		}
 	}

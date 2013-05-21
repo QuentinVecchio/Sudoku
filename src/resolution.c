@@ -3,7 +3,7 @@
 	QUENTIN VECCHIO
 	17 mai 2013
 */
-int Est_Candidat(int chiffre,T_Case Case , int grille[][])
+int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 {
 /*
 	Fonction qui prend en paramètre une case et qui cherche si le chiffre donné peut etre clé candidate pour la case.
