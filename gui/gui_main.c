@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include "GUI_Resoudre.h"
-//#include "GUI_Option"
+#include "gui_resoudre.h"
+#include "gui_options.h"
 //#include "struc.c"
 
 int main (int argc, char **argv)
@@ -59,7 +59,7 @@ int main (int argc, char **argv)
 
 	//Initialisation du bouton Options
 	btnOption = gtk_button_new_with_mnemonic("_Options");
-	g_signal_connect(G_OBJECT(btnOption),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(btnOption),"clicked", G_CALLBACK(options), NULL);
 	gtk_box_pack_start(GTK_BOX(boxVertical),btnOption,FALSE,FALSE,15);
 
 	//Initialisation du bouton Credit
