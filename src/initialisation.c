@@ -6,20 +6,26 @@
 #include "initialisation.h"
 
 main()
+
 {
 	printf("hello world\n");
 	return 0;
 }
 
-
-void Init_Data(L_Candidats * LC)
+/*
+ * @param: LC est un tableau [9][9] qui contient soit NULL soit une liste de candidats
+ */
+void Init_Data(L_Candidats  LC[9][9])
 {
 	//SPECIFICATION
 	
-	int i, j; //index de parcours du tableau 'LC'
+	T_Case index; //index de parcours du tableau 'LC'
 	
-	int Grille[9][9]; //tableau de valeur du fichier
-	int n; //index de parcours du tableau 'Init'
+	int Grille[9][9]={0}; //tableau de valeur du fichier
+	int nb; //varis de 1 à 9 pour remplire la liste des candidats dans le tableau LC
+	
+	int possible = 0; //booleen qui défini si 'nb' est un candidat possible pour la case LC[][]
+	
 	
 	
 	//CORPS
@@ -35,16 +41,27 @@ void Init_Data(L_Candidats * LC)
 	 * on attribut a la case un pointeur sur la liste des candidats de la case
 	 */
 	
-	//Initialisation da la variable Init avec la fonctio lireGrille
-	lireGrille(&n, Grille);
+	//Initialisation da la variable Init avec la fonction lireGrille
+	lireGrille(Grille);
 	
 	
 	
-	for(i=0; i<9; i++)
+	for(index.ligne = 0; index.ligne < 9; index.ligne ++)
 	{
-		for(j=0; j<9; j++)
+		for(index.colonne = 0; index.colonne < 9; index.colonne ++)
 		{
-
+			if(Grille[index.ligne][index.colonne] != 0) LC[index.ligne][index.colonne] = NULL;
+			else
+			{
+				for(nb = 1; nb <= 9; nb ++)
+				{
+					possible = Est_Candidat(nb, index, Grille);
+					if(possible)
+					{
+						//on ajout 'nb' a la liste des candidats!
+					}
+				}
+			}
 		}
 	}
 }
@@ -53,7 +70,7 @@ void Init_Data(L_Candidats * LC)
 /*
  * une fonction qui retourne un tableau de valeur correspondant au fichier txt fourni
  */
-void lireGrille(int *n, int Grille[9][9])
+void lireGrille(int Grille[9][9])
 {
-	n=0;
+	//Fonction écrit par Cindy!!!
 }
