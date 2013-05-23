@@ -5,6 +5,7 @@
 */
 #include "GestionCases.h"
 #include "GestionCandidats.h"
+#include <stdio.h>
 
 int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 {
@@ -13,19 +14,20 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 	On cherche si le chiffre est dans la ligne de la case, ensuite de la colonne et enfin dans le carré. On s'aide de la grille qui est remplie.
 	La fonction s'arrête directement si elle trouve dans la grille le chiffre. Si l'opération se déroule bien alors le chifffe peut être candidat de la case.
 */
+
 	int i;
+		
 	//On cherche le chiffre dans la ligne
 	for(i=0;i<9;i++)
         {
-		if(grille[i][Case.colonne] == chiffre)
+		if(grille[i][Case.colonne] == chiffre && grille[Case.ligne][i] == chiffre)
 			return 0;
         }
         //On cherche le chiffre dans la colonne
-        for(i=0;i<9;i++)
-        {
-                if(grille[Case.ligne][i] == chiffre)
-			return 0;
-        }
+		printf("ici\n");
+		return 0;
+
+        
 	//On cherche dans le carré
 	int x = Case.ligne-Case.ligne%3;
         int y = Case.colonne-Case.colonne%3;

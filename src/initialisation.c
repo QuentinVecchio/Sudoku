@@ -3,7 +3,6 @@
 #include "GestionCandidats.h"
 #include "GestionCases.h"
 #include "resolution.h"
-#include "../tui/affiche.h"
 #include "initialisation.h"
 
 
@@ -61,8 +60,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 	
 	//Initialisation da la variable Init avec la fonction lireGrille
 	lireGrille(Grille,lien);
-	
-	
+
 	for(ligne = 0; ligne < 9; ligne ++)
 	{
 		for(colonne = 0; colonne < 9; colonne ++)
@@ -72,13 +70,16 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 			{
 				for(nb = 1; nb <= 9; nb ++)
 				{
+
 					possible = Est_Candidat(nb, (T_Case){ligne,colonne}, Grille);
 					if(possible)
 					{
+						printf("\nje suis sorti\n");
+						return;						
+						
 						ajout_element_Candidats(LC[ligne][colonne], nb);
 					}
 				}
-				lireGrille(Grille,"../res/g1.txt");
 				//on ajoute la case courrante a la liste des cases ouvert
 				ajout_element_Case(LO, (T_Case){ligne, colonne});
 				
