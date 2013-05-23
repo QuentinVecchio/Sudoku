@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 void Affiche_Grille(int Grille[9][9])
 {
 	int i,j;
@@ -7,7 +9,7 @@ void Affiche_Grille(int Grille[9][9])
 		{
 			printf(" %d ",Grille[i][j]);
 		}
-		printf("/n");	
+		printf("\n");	
 	}
 }
 

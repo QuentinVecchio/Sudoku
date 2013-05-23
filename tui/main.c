@@ -1,5 +1,6 @@
 #include <stdio.h>
-//#include "../src/GestionCandidats.h"
+#include "../src/GestionCandidats.h"
+#include "../src/GestionCases.h"
 //#include "../src/struc.c"
 #include "affiche.h"
 #include "../src/initialisation.h"

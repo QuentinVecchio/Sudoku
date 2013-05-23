@@ -6,12 +6,6 @@
 
 #include "initialisation.h"
 
-main()
-
-{
-	printf("hello world\n");
-	return 0;
-}
 
 /*
  * @param: LC est un tableau [9][9] qui contient soit NULL soit une liste de candidats
@@ -44,7 +38,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 	 */
 	
 	//Initialisation da la variable Init avec la fonction lireGrille
-	lireGrille(Grille);
+	lireGrille(Grille,"../res/g1.txt");
 	
 	
 	
@@ -80,11 +74,12 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 void lireGrille(int Grille[9][9],char lien[])
 {
 	FILE *f=NULL;
-	int ligne,colonne;
+	int ligne,colonne,var;
 	f=fopen(lien,"r");
 	if (f!=NULL)
 	{
-		while (fscanf(f,"%d %d %d",&ligne,&colonne,&Grille[ligne][colonne])!=EOF);
+		while (fscanf(f,"%d %d %d",&ligne,&colonne,&var)!=EOF)
+		Grille[ligne][colonne] = var;
 		
 	}
 	else
