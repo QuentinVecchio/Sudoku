@@ -3,7 +3,7 @@
 #include "GestionCandidats.h"
 #include "GestionCases.h"
 #include "resolution.h"
-
+#include "../tui/affiche.h"
 #include "initialisation.h"
 
 
@@ -31,13 +31,13 @@ void lireGrille(int Grille[9][9],char lien[])
 /*
  * @param: LC est un tableau [9][9] qui contient soit NULL soit une liste de candidats
  */
-void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
+void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 {
 	//SPECIFICATION
 	
 	int ligne, colonne; //index de parcours du tableau 'LC'
 	
-	int Grille[9][9]={0}; //tableau de valeur du fichier
+	//int Grille[9][9]={0}; //tableau de valeur du fichier
 	int nb; //varis de 1 à 9 pour remplire la liste des candidats dans le tableau LC
 	
 	int possible = 0; //booleen qui défini si 'nb' est un candidat possible pour la case LC[][]
@@ -48,7 +48,8 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 	
 	//CORPS
 	
-	/*
+	/*lireGrille(Grille,"../res/g1.txt");
+	Affiche_Grille(Grille);
 	 * on ferme les cases qui sont dans le fichier txt	lireGrille(Grille,"../res/g1.txt");
 	 * et on leur attribut NULL 
 	 */
@@ -59,7 +60,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO)
 	 */
 	
 	//Initialisation da la variable Init avec la fonction lireGrille
-	lireGrille(Grille,"../res/g1.txt");
+	lireGrille(Grille,lien);
 	
 	
 	for(ligne = 0; ligne < 9; ligne ++)
