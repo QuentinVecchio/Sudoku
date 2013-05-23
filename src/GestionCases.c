@@ -36,15 +36,18 @@ void affiche_liste_Case(L_Cases L)
 
 void ajout_element_Case(L_Cases L, T_Case elt)
 {
-	L_Cases i = L;
-	if(L == NULL)
-	{
-		L= (L_Cases) malloc(sizeof(Cases));
-		L->courant = elt;
-		L->suivant = L;
+	ajout_element_Case
+	if(est_vide(L))
+	{	
+		L = creer_liste(elt);
+// 		L= (L_Cases) malloc(sizeof(Cases));
+// 		L->courant = elt;
+// 		L->suivant = L;
 		printf("appel\n");
+		affiche_liste_Case(L);
 		return;
 	}
+	L_Cases i = L;
 	while(i->suivant != L) i= i->suivant;
 	L_Cases tmp = creer_liste(elt);
 	tmp->suivant = L;
@@ -77,24 +80,24 @@ int est_egal(T_Case a, T_Case b)
 	return (a.ligne == b.ligne && a.colonne == b.colonne);
 }
 
-// main()
-// {
-// 		T_Case c;
-// 		c.ligne = 5;
-// 		c.colonne =8;
-// 		L_Cases a = NULL;
-// 		a = creer_liste_vide();
-// 		L_Cases b = creer_liste_vide();
-// 		
-// 		ajout_element_Case(a, (T_Case){0,5});
-// 		ajout_element_Case(a, (T_Case){0,6});
-// 		ajout_element_Case(a, (T_Case){0,7});
-// 		ajout_element_Case(a, (T_Case){1,2});
-// 		ajout_element_Case(a, (T_Case){1,3});
-// 		ajout_element_Case(a, (T_Case){1,4});
-// 		ajout_element_Case(a, (T_Case){1,6});
-// 
-// 		
-// 		printf("affiche\n");
-// 		affiche_liste_Case(a);
-// }
+main()
+{
+		T_Case c;
+		c.ligne = 5;
+		c.colonne =8;
+		L_Cases a = creer_liste(c);
+		
+		ajout_element_Case(a, (T_Case){0,5});
+		printf("oo\n");
+				affiche_liste_Case(a);
+		ajout_element_Case(a, (T_Case){0,6});
+		ajout_element_Case(a, (T_Case){0,7});
+		ajout_element_Case(a, (T_Case){1,2});
+		ajout_element_Case(a, (T_Case){1,3});
+		ajout_element_Case(a, (T_Case){1,4});
+		ajout_element_Case(a, (T_Case){1,6});
+
+		
+		printf("affiche\n");
+
+}
