@@ -74,16 +74,24 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 					possible = Est_Candidat(nb, (T_Case){ligne,colonne}, Grille);
 					if(possible)
 					{
-						printf("\nje suis sorti\n");
-						return;						
+						printf("\n%d est candidat\n", nb);
+						return;
+/*						printf("\nje suis sorti\n");
+						return;		*/				
 						
 						ajout_element_Candidats(LC[ligne][colonne], nb);
 					}
+					
 				}
+// 				printf("affiche candidat\n");
+// 				if(LC[ligne][colonne] == NULL)affiche_liste_Candidats(LC[ligne][colonne]);
+// 				printf("fin affiche\n");
 				//on ajoute la case courrante a la liste des cases ouvert
 				ajout_element_Case(LO, (T_Case){ligne, colonne});
-				
+// 				printf("affiche\n");
+				affiche_liste_Case(LO);
 			}
+			break;
 		}
 	}
 }

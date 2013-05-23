@@ -2,7 +2,7 @@
 #include "../src/GestionCandidats.h"
 #include "../src/GestionCases.h"
 #include "affiche.h"
-main()
+int main()
 {
 	printf("Bienvenue dans le logiciel de résolution de sudoku\n");
 	int Grille[9][9]={0};

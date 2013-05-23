@@ -20,23 +20,21 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 	//On cherche le chiffre dans la ligne
 	for(i=0;i<9;i++)
         {
-		if(grille[i][Case.colonne] == chiffre && grille[Case.ligne][i] == chiffre)
+		if(grille[i][Case.colonne] == chiffre || grille[Case.ligne][i] == chiffre)
 			return 0;
         }
         //On cherche le chiffre dans la colonne
-		printf("ici\n");
-		return 0;
 
         
 	//On cherche dans le carré
 	int x = Case.ligne-Case.ligne%3;
         int y = Case.colonne-Case.colonne%3;
-        while(x != x+3)
+        while(x <= x+3)
         {
-        	while(y != y+3)
+        	while(y <= y+3)
                 {
-                      	if(grille[x][y] == chiffre)
-                        	return 0;
+                      	if(grille[x][y] == chiffre) return 0;
+						y++;
                 }
                 y -=3;
                 x++;
@@ -76,9 +74,9 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 		//Suppression dans le carré et dans la case
 		x = Case.ligne-Case.ligne%3;
 		y = Case.colonne-Case.colonne%3;
-		while(x != x+3)
+		while(x <= x+3)
 		{
-			while(y != y+3)
+			while(y <= y+3)
 			{
 				supprimer_element(LC[x][y],chiffre);
 				y++;
