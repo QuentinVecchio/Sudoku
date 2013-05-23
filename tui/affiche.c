@@ -1,4 +1,8 @@
 #include <stdio.h>
+<<<<<<< local
+
+=======
+>>>>>>> other
 void Affiche_Grille(int Grille[9][9])
 {
 	int i,j;

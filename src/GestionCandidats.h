@@ -1,3 +1,6 @@
+#ifndef GestionCandidath
+#define GestionCandidath
+
 /*
  * 	Gestion de la liste chaînée représentant les candidats d'un case donnée.
  * 	Les éléments sont rangés dans l'ordre croissant
@@ -60,3 +63,4 @@ int appartient_liste(L_Candidats L, int elt);
  */
 int longueur_liste(L_Candidats L);
 
+#endif

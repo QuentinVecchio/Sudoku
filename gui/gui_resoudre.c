@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
 #include <string.h>
 
 #include "gui_resoudre.h"
@@ -63,7 +61,7 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         }
         else
         {
-                gtk_widget_destroy(dialogBoxChoix);
+                gtk_widget_destroy(dialogBox);
         }
 
 }
@@ -71,101 +69,79 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
 void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 {
 	int i,y;
+//Destruction de la fenetre choix fichier
+	gtk_widget_destroy(dialogBox);
+//Initialisation des chaines à afficher
+	char nombreAffiche[2];
 	char strNiveau[20];
 	sprintf(strNiveau,"Niveau %d",niv);
 	char strTps[30];
 	sprintf(strTps,"Temps execution : %d ms",tps);
-	gtk_widget_destroy(dialogBox);
-	SDL_Init(SDL_INIT_VIDEO);
-//ouverture de la bibliotheque d'écriture
-    	TTF_Init();
+//Initialisation variables fenetre
+	GtkWidget * fenetrePrincipale = NULL;
+	GtkWidget * vBoxFenetre = NULL;
+//Initialisation variables haut fenetre
+	GtkWidget * labelNiveau = NULL;
+	GtkWidget * labelTemps = NULL;
+	GtkWidget * hBoxHaut = NULL;
+//Initialisation variables milieu de fenetre
+	GtkWidget * imageGrille = NULL;
+	GtkWidget * labelChiffre[9][9];
+	GtkWidget * vBoxGrille;
+	GtkWidget * TabHBoxLigne[9];
+//Initialisation variables bas de fenetre
+	GtkWidget * btnMenu = NULL;
+	GtkWidget * btnQuitter = NULL;
+	GtkWidget * hBoxBas = NULL;
 //Initialisation de la fenetre Principale
-	SDL_Surface *fenetrePrincipale = NULL; //Fenetre de l'application
-    	fenetrePrincipale = SDL_SetVideoMode(480,480,32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    	SDL_FillRect(fenetrePrincipale, NULL, SDL_MapRGB(fenetrePrincipale->format,111,183,255)); //On initialise la couleur de $
-    	SDL_WM_SetCaption("Résolution du Sudoku",NULL);
-//Initialisation de l'image d'une grille
-        SDL_Surface *Grille = NULL;
-        Grille = SDL_LoadBMP("Grille.bmp");
-        SDL_Rect posGrille;
-        posGrille.x = 72;
-        posGrille.y = 72;
-//Initialisation des écritures et des couleurs
-	char nombreAffich[2];//Variable qui contiendra le chiffre à afficher
-        TTF_Font *police = NULL;
-        police = TTF_OpenFont("police2.ttf",21); //Initialisation de la police
-        SDL_Color couleurNoire = {0,0,0}; // Couleur Noire qui affiche les nombres déjà présent
-	SDL_Color couleurBleue = {0,0,255}; // Couleur Bleue qui affiche les nouveau nombre
-//Initialisation d'un tableau d'affichage pour les chiffres
-	SDL_Surface *affichageChiffre[9][9];//Tableau qui va contenir les chiffres
-	SDL_Rect posAffichageChiffre[9][9];//Tableau de position qui contient les chiffres
-	//Initialisation des positions d'affichage
+	fenetrePrincipale = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        gtk_window_set_position(GTK_WINDOW(fenetrePrincipale), GTK_WIN_POS_CENTER);
+        gtk_window_set_title(GTK_WINDOW(fenetrePrincipale), "Solution du sudoku");
+        gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),480,480);
+        g_signal_connect(G_OBJECT(fenetrePrincipale), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
+        gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipale),"icon.png",NULL);
+	vBoxFenetre = gtk_vbox_new(FALSE,30);
+	gtk_container_add(GTK_CONTAINER(fenetrePrincipale),vBoxFenetre);
+//Initialisation de la partie Haut de la fenetre
+        labelNiveau = gtk_label_new(strNiveau);
+	labelTemps = gtk_label_new(strTps);
+	hBoxHaut = gtk_hbox_new(TRUE, 30);
+        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,5);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,5);
+	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxHaut,FALSE, FALSE,0);
+//Initialisation de la partie du milieu de la fenetre
+	imageGrille = gtk_image_new_from_file("Grille.bmp");
+	vBoxGrille = gtk_vbox_new(TRUE,0);
 	for(i=0;i<9;i++)
-	{
+        {
+        	TabHBoxLigne[i] = gtk_hbox_new(FALSE, 0);
 		for(y=0;y<9;y++)
-		{
-			posAffichageChiffre[i][y].x = (7.8 + y*40) + 72;
-			posAffichageChiffre[i][y].y = (7.8 + i*40) + 72;
-		}
-	}
-//Initialisation de l'affichage du temps d'execution
-	TTF_Font *police2 = NULL;
-        police2 = TTF_OpenFont("police2.ttf",30);
-	SDL_Surface *affichageTps = NULL;
-	SDL_Rect posAffichageTps;
-	posAffichageTps.x = 170;
-	posAffichageTps.y = 20;
-	affichageTps = TTF_RenderText_Blended(police2,strTps,couleurNoire);
-//Initialisation de l'affichage du niveau
-	SDL_Surface *affichageNiveau = NULL;
-        SDL_Rect posAffichageNiveau;
-        posAffichageNiveau.x = 7;
-        posAffichageNiveau.y = 20;
-        affichageNiveau = TTF_RenderText_Blended(police2,strNiveau,couleurNoire);
-//Initialisation de l'affichage de la phrase qui invite à quitter
-	SDL_Surface *affichageQuitter = NULL;
-        SDL_Rect posAffichageQuitter;
-        posAffichageQuitter.x = 2;
-        posAffichageQuitter.y = 440;
-        affichageQuitter = TTF_RenderText_Blended(police2,"Appuyer sur une touche pour quitter !",couleurNoire);
-//Début du programme
-	int continuer = 1;//variable pour continuer
-        SDL_Event event;//Déclaration d'un evenement
-	while(continuer)
-    	{
-        	SDL_PollEvent(&event);//On recupere l'evenement et on le traite
-        	switch(event.type)
-        	{
-                	case SDL_QUIT :
-                        	continuer = 0;//On quitte le jeu
-                        	break;
-		}
-		SDL_BlitSurface(affichageQuitter, NULL, fenetrePrincipale, &posAffichageQuitter);
-		SDL_BlitSurface(affichageTps, NULL, fenetrePrincipale, &posAffichageTps);
-		SDL_BlitSurface(affichageNiveau, NULL, fenetrePrincipale, &posAffichageNiveau);
-		SDL_BlitSurface(Grille, NULL, fenetrePrincipale, &posGrille);//On affiche la grille
-       	 	for(i=0;i<9;i++)//Affiche les chiffres présent déjà dans la grille
-        	{
-			for(y=0;y<9;y++)
-			{
-                		if(grille1[i][y] != 0)
-                		{
-                        		sprintf(nombreAffich,"%d",grille1[i][y]);
-                        		affichageChiffre[i][y] = TTF_RenderText_Blended(police,nombreAffich,couleurNoire);
-                        		SDL_BlitSurface(affichageChiffre[i][y], NULL, fenetrePrincipale, &posAffichageChiffre[i][y]);
-                		}
-				else
-				{
-					sprintf(nombreAffich,"%d",grille2[i][y]);
-                                        affichageChiffre[i][y] = TTF_RenderText_Blended(police,nombreAffich,couleurBleue);
-                                        SDL_BlitSurface(affichageChiffre[i][y], NULL, fenetrePrincipale, &posAffichageChiffre[i][y]);
-				}
-			}
-                }
-		SDL_BlitSurface(affichageTps, NULL, fenetrePrincipale, &posAffichageTps);
-		SDL_Flip(fenetrePrincipale);
-    	}
-	//On quitte le jeu proprement
-        TTF_Quit();
-        SDL_Quit();
+                {
+                        if(grille1[i][y] != 0)
+                        {
+                                        sprintf(nombreAffiche,"0");
+                        }
+                        else
+                       	{
+                                        sprintf(nombreAffiche,"%d",grille2[i][y]);
+                       	}
+			labelChiffre[i][y] = gtk_label_new("0");
+                     	gtk_box_pack_start(GTK_BOX(TabHBoxLigne[i]),labelChiffre[i][y],FALSE,FALSE,0);
+
+       		}
+		gtk_box_pack_start(GTK_BOX(vBoxGrille),TabHBoxLigne[i],TRUE,TRUE,0);
+       	}
+	gtk_box_pack_start(GTK_BOX(vBoxFenetre),imageGrille,TRUE,TRUE,0);
+	gtk_container_add(GTK_CONTAINER(imageGrille),vBoxGrille);
+//Initialisation de la partie bas de la fenetre
+        btnMenu = gtk_button_new_with_mnemonic("_Menu");
+	btnQuitter = gtk_button_new_with_mnemonic("_Quitter");
+	hBoxBas = gtk_hbox_new(TRUE, 30);
+        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+        g_signal_connect(G_OBJECT(btnQuitter),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+        gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,15);
+        gtk_box_pack_start(GTK_BOX(hBoxBas),btnQuitter,FALSE,FALSE,15);
+	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxBas,FALSE, FALSE,0);
+//Affichage
+        gtk_widget_show_all(fenetrePrincipale);
 }
