@@ -2,7 +2,7 @@ Sudoku : main.o GestionCandidats.o GestionCases.o resolution.o initialisation.o 
 	gcc main.o GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o -o Sudoku
 	
 main.o :initialisation.o resolution.o GestionCandidats.o GestionCases.o affiche.o
-	gcc  -c GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o tui/main.c 
+	gcc -c GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o tui/main.c 
 	
 initialisation.o : GestionCandidats.o GestionCases.o resolution.o
 	gcc  -c GestionCandidats.o GestionCases.o resolution.o  src/initialisation.c
@@ -25,5 +25,6 @@ GestionCases.o :
 clean : 
 	rm *.o
 	
+#efface les fichier '*.o' plus l'executable 'Sudoku'
 reset :
 	rm *.o Sudoku
