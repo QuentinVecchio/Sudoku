@@ -18,27 +18,31 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 	int i;
 		
 	//On cherche le chiffre dans la ligne
+  //On cherche le chiffre dans la colonne
 	for(i=0;i<9;i++)
-        {
-		if(grille[i][Case.colonne] == chiffre || grille[Case.ligne][i] == chiffre)
-			return 0;
-        }
-        //On cherche le chiffre dans la colonne
+	{
+	if(grille[i][Case.colonne] == chiffre || grille[Case.ligne][i] == chiffre)
+		return 0;
+	}
+      
 
         
 	//On cherche dans le carré
 	int x = Case.ligne-Case.ligne%3;
-        int y = Case.colonne-Case.colonne%3;
-        while(x <= x+3)
-        {
-        	while(y <= y+3)
-                {
-                      	if(grille[x][y] == chiffre) return 0;
-						y++;
-                }
-                y -=3;
-                x++;
-         }
+	int val_x = x;
+	int y = Case.colonne-Case.colonne%3;
+	int val_y = y;
+	
+	while(x < val_x+3)
+	{
+		while(y < val_y+3)
+		{
+			if(grille[x][y] == chiffre) return 0;
+			y++;
+		}
+		y -=3;
+		x++;
+	}
 	return 1;
 }
 

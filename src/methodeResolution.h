@@ -1,5 +1,5 @@
-// #ifndef methodeResolutionH
-// #define methodeResolutionH
+#ifndef methodeResolutionH
+#define methodeResolutionH
 /*
 	HEADER methodeResolotion
 
@@ -12,4 +12,4 @@ int fermerGrille(int grille[][], L_Case LO, L_Candidats LC[][]);
 //Fonction récursive qui réalise le backtracking
 int Backtrack(int grille[][], L_Case LO, L_Candidats LC[][]);
 
-// #endif methodeResolutionH
+#endif methodeResolutionH

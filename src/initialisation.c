@@ -41,7 +41,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 	
 	int possible = 0; //booleen qui défini si 'nb' est un candidat possible pour la case LC[][]
 	
-	LO = creer_liste_vide();
+	
 	
 	
 	
@@ -60,9 +60,12 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 	
 	//Initialisation da la variable Init avec la fonction lireGrille
 	lireGrille(Grille,lien);
-
+	
 	for(ligne = 0; ligne < 9; ligne ++)
 	{
+		/*	Rajouter une fonction pour détruire la liste pour chaque ligne.
+		 */
+		LO = creer_liste_vide();
 		for(colonne = 0; colonne < 9; colonne ++)
 		{
 			if(Grille[ligne][colonne] != 0) LC[ligne][colonne] = NULL;
@@ -70,29 +73,19 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 			{
 				for(nb = 1; nb <= 9; nb ++)
 				{
-
 					possible = Est_Candidat(nb, (T_Case){ligne,colonne}, Grille);
 					if(possible)
 					{
-						printf("\n%d est candidat\n", nb);
-						return;
-/*						printf("\nje suis sorti\n");
-						return;		*/				
-						
-						ajout_element_Candidats(LC[ligne][colonne], nb);
+						//ajout_element_Candidats(LC[ligne][colonne], nb);
 					}
 					
 				}
-// 				printf("affiche candidat\n");
-// 				if(LC[ligne][colonne] == NULL)affiche_liste_Candidats(LC[ligne][colonne]);
-// 				printf("fin affiche\n");
+
 				//on ajoute la case courrante a la liste des cases ouvert
-				ajout_element_Case(LO, (T_Case){ligne, colonne});
-// 				printf("affiche\n");
-				affiche_liste_Case(LO);
+				ajout_elt_case(&LO, (T_Case){ligne, colonne});
 			}
-			break;
 		}
+		
 	}
 }
 

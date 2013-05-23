@@ -15,10 +15,12 @@ typedef struct T_Case
 	int colonne;
 } T_Case;
 
+
 typedef struct cases
 {
-	T_Case 		courant;
-	struct cases * 	suivant;
+	struct cases *  pred;
+	T_Case          courant;
+	struct cases *  suivant;
 } Cases;
 
 typedef Cases* L_Cases;
@@ -44,21 +46,26 @@ int est_vide(L_Cases L);
  */
 void affiche_liste_Case(L_Cases L);
 
+
+void affiche_liste_case_reverse(L_Cases L);
+
+
 /*
  * 	Ajoute un élément en fin de liste
  */
-void ajout_element_Case(L_Cases L, T_Case elt);
+void ajout_elt_case(L_Cases *L, T_Case elt);
 
 /*
  *	Enlève un élément de la liste
  */ 
-void eleve_element(L_Cases L, T_Case elt);
+void enleve_elt_case(L_Cases *L, T_Case elt);
 
 /*
  * 	Compare deux cases, renvoit 1 si égal, 0 sinon
  */
 int est_egal(T_Case a, T_Case b);
 
+int est_inf(T_Case a, T_Case b);
 
 #endif
 
