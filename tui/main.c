@@ -3,7 +3,8 @@
 #include "../src/GestionCases.h"
 //#include "../src/struc.c"
 #include "affiche.h"
-#include "../src/initialisation.h"
+// #include "../src/resolution
+// #include "../src/initialisation.h"
 main()
 {
 	printf("Bienvenue dans le logiciel de résolution de sudoku\n");

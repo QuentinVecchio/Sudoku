@@ -1,3 +1,5 @@
+#ifndef GestionCasesh
+#define GestionCasesh
 /*
  *  Gestion des cases ouvertes sous forme de liste circulaire
  * 
@@ -58,5 +60,5 @@ void eleve_element(L_Cases L, T_Case elt);
 int est_egal(T_Case a, T_Case b);
 
 
-
+#endif
 
