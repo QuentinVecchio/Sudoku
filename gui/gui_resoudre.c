@@ -72,11 +72,13 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 //Destruction de la fenetre choix fichier
 	gtk_widget_destroy(dialogBox);
 //Initialisation des chaines à afficher
-	char nombreAffiche[2];
+	char nombreAffiche[60];
 	char strNiveau[20];
 	sprintf(strNiveau,"Niveau %d",niv);
 	char strTps[30];
 	sprintf(strTps,"Temps execution : %d ms",tps);
+//Initialisation d'un GtkRc pour le fond de la grille
+	gtk_rc_parse("./gtkrc.rc");
 //Initialisation variables fenetre
 	GtkWidget * fenetrePrincipale = NULL;
 	GtkWidget * vBoxFenetre = NULL;
@@ -85,7 +87,6 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 	GtkWidget * labelTemps = NULL;
 	GtkWidget * hBoxHaut = NULL;
 //Initialisation variables milieu de fenetre
-	GtkWidget * imageGrille = NULL;
 	GtkWidget * labelChiffre[9][9];
 	GtkWidget * vBoxGrille;
 	GtkWidget * TabHBoxLigne[9];
@@ -100,48 +101,50 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
         gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),480,480);
         g_signal_connect(G_OBJECT(fenetrePrincipale), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
         gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipale),"icon.png",NULL);
-	vBoxFenetre = gtk_vbox_new(FALSE,30);
+	vBoxFenetre = gtk_vbox_new(FALSE,8);
 	gtk_container_add(GTK_CONTAINER(fenetrePrincipale),vBoxFenetre);
 //Initialisation de la partie Haut de la fenetre
         labelNiveau = gtk_label_new(strNiveau);
 	labelTemps = gtk_label_new(strTps);
-	hBoxHaut = gtk_hbox_new(TRUE, 30);
-        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,5);
-	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,5);
-	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxHaut,FALSE, FALSE,0);
+	hBoxHaut = gtk_hbox_new(TRUE,0);
+        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,10);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,10);
+	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxHaut,FALSE, FALSE,10);
 //Initialisation de la partie du milieu de la fenetre
-	imageGrille = gtk_image_new_from_file("Grille.bmp");
-	vBoxGrille = gtk_vbox_new(TRUE,0);
+	GtkWidget * alignement = gtk_alignment_new(0.55,0.55,0.1,0.1);
+	vBoxGrille = gtk_vbox_new(FALSE,23);
 	for(i=0;i<9;i++)
         {
-        	TabHBoxLigne[i] = gtk_hbox_new(FALSE, 0);
+        	TabHBoxLigne[i] = gtk_hbox_new(FALSE, 22);
 		for(y=0;y<9;y++)
                 {
                         if(grille1[i][y] != 0)
                         {
-                                        sprintf(nombreAffiche,"0");
-                        }
+					sprintf(nombreAffiche,"<span foreground=\"#000000\"><big><b>%d</b></big></span>",grille1[i][y]);
+			}
                         else
                        	{
-                                        sprintf(nombreAffiche,"%d",grille2[i][y]);
-                       	}
-			labelChiffre[i][y] = gtk_label_new("0");
-                     	gtk_box_pack_start(GTK_BOX(TabHBoxLigne[i]),labelChiffre[i][y],FALSE,FALSE,0);
+                                     	sprintf(nombreAffiche,"<span foreground=\"#FF0000\"><big><b>%d</b></big></span>",grille2[i][y]);
+			}
+			labelChiffre[i][y] = gtk_label_new(nombreAffiche);
+			gtk_label_set_use_markup(GTK_LABEL(labelChiffre[i][y]),TRUE);
+                     	gtk_box_pack_start(GTK_BOX(TabHBoxLigne[i]),labelChiffre[i][y],FALSE,FALSE,5); // on ajoute un chiffre a la ligne
 
        		}
-		gtk_box_pack_start(GTK_BOX(vBoxGrille),TabHBoxLigne[i],TRUE,TRUE,0);
+		gtk_box_pack_start(GTK_BOX(vBoxGrille),TabHBoxLigne[i],TRUE,TRUE,0);//On ajoute la ligne a la Box vertical
        	}
-	gtk_box_pack_start(GTK_BOX(vBoxFenetre),imageGrille,TRUE,TRUE,0);
-	gtk_container_add(GTK_CONTAINER(imageGrille),vBoxGrille);
+	gtk_container_add( GTK_CONTAINER(alignement), vBoxGrille);
+	gtk_box_pack_start(GTK_BOX(vBoxFenetre),alignement,FALSE,TRUE,34);//On ajoute la box vertical a la fenetre
 //Initialisation de la partie bas de la fenetre
         btnMenu = gtk_button_new_with_mnemonic("_Menu");
 	btnQuitter = gtk_button_new_with_mnemonic("_Quitter");
 	hBoxBas = gtk_hbox_new(TRUE, 30);
         g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(gtk_main_quit), NULL);
         g_signal_connect(G_OBJECT(btnQuitter),"clicked", G_CALLBACK(gtk_main_quit), NULL);
-        gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,15);
-        gtk_box_pack_start(GTK_BOX(hBoxBas),btnQuitter,FALSE,FALSE,15);
+        gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,20);
+        gtk_box_pack_start(GTK_BOX(hBoxBas),btnQuitter,FALSE,FALSE,20);
 	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxBas,FALSE, FALSE,0);
 //Affichage
         gtk_widget_show_all(fenetrePrincipale);
 }
+
