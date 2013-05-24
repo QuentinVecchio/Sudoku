@@ -9,6 +9,9 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+#include "../src/GestionCandidats.h"
+#include "../src/GestionCases.h"
+#include "../src/initialisation.h"
 #include "gui_resoudre.h"
 
 /*Variables globales */
@@ -44,7 +47,8 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         switch(gtk_dialog_run(GTK_DIALOG(dialogBox)))
         {
                 case GTK_RESPONSE_OK :
-                	 affiche(grilleD,grilleF,tpsExecution,Niveau);
+			lireGrille(grilleD,lienFichier);
+                	affiche(grilleD,grilleF,tpsExecution,Niveau);
 	}
 }
 
@@ -61,7 +65,7 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         }
         else
         {
-                gtk_widget_destroy(dialogBox);
+                gtk_widget_destroy(dialogBoxChoix);
         }
 
 }

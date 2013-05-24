@@ -10,7 +10,8 @@
 
 #include "gui_resoudre.h"
 #include "gui_options.h"
-//#include "struc.c"
+#include "gui_credit.h"
+#include "gui_jeux.h"
 
 int main (int argc, char **argv)
 {
@@ -48,7 +49,7 @@ int main (int argc, char **argv)
 
 	//Initialisation du bouton Jouer
 	btnJouer = gtk_button_new_with_mnemonic("_Jouer au Sudoku");
-	g_signal_connect(G_OBJECT(btnJouer),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(btnJouer),"clicked", G_CALLBACK(jouer), NULL);
 	gtk_box_pack_start(GTK_BOX(boxVertical),btnJouer,FALSE,FALSE,15);
 
 	//Initialisation du bouton Resoudre
@@ -65,7 +66,7 @@ int main (int argc, char **argv)
 	//Initialisation du bouton Credit
 	labelCredit = g_locale_to_utf8("_Crédits",-1, NULL, NULL, NULL);//Permet de mettre un accent 
 	btnCredit = gtk_button_new_with_mnemonic(labelCredit);
-	g_signal_connect(G_OBJECT(btnCredit),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(btnCredit),"clicked", G_CALLBACK(afficheCredit), NULL);
 	gtk_box_pack_start(GTK_BOX(boxVertical),btnCredit,FALSE,FALSE,15);
 
 	//Initialisation du bouton Quitter

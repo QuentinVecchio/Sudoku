@@ -9,6 +9,7 @@
 #include <gtk/gtk.h>
 
 #include "gui_options.h"
+#include "gui_resoudre.h"
 
 void options(GtkWidget *widget, gpointer data)
 {
@@ -33,6 +34,7 @@ void options(GtkWidget *widget, gpointer data)
 	hBox1 = gtk_hbox_new( FALSE, 10);
 	zoneSaisi1 = gtk_entry_new();
 	btnEdit1 = gtk_button_new_with_label("...");
+	g_signal_connect(G_OBJECT(btnEdit1),"clicked", G_CALLBACK(dialogBoxChoixFichier), NULL);
 	gtk_box_pack_start(GTK_BOX(hBox1), zoneSaisi1, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(hBox1), btnEdit1, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label1, TRUE, TRUE, 10);
@@ -43,6 +45,7 @@ void options(GtkWidget *widget, gpointer data)
 	hBox2 = gtk_hbox_new(FALSE, 10);
 	zoneSaisi2 = gtk_entry_new();
 	btnEdit2 = gtk_button_new_with_label("...");
+	g_signal_connect(G_OBJECT(btnEdit2),"clicked", G_CALLBACK(dialogBoxChoixFichier), NULL);
 	gtk_box_pack_start(GTK_BOX(hBox2), zoneSaisi2, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(hBox2), btnEdit2, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label2, TRUE, TRUE, 10);
@@ -52,6 +55,7 @@ void options(GtkWidget *widget, gpointer data)
 	hBox3 = gtk_hbox_new(FALSE, 10);
 	zoneSaisi3 = gtk_entry_new();
 	btnEdit3 = gtk_button_new_with_label("...");
+ 	g_signal_connect(G_OBJECT(btnEdit3),"clicked", G_CALLBACK(dialogBoxChoixFichier), NULL);
 	gtk_box_pack_start(GTK_BOX(hBox3), zoneSaisi3, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(hBox3), btnEdit3, FALSE, FALSE,10);
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), label3, TRUE, TRUE, 10);
