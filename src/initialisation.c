@@ -77,7 +77,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 					if(possible)
 					{
 						//erreur dans ma fonction => refaire tout correctement
-						//ajout_element_Candidats(LC[ligne][colonne], nb);
+						ajout_element_Candidats(&LC[ligne][colonne], nb);
 					}
 					
 				}

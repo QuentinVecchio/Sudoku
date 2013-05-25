@@ -8,7 +8,7 @@ int main()
 {
 	printf("Bienvenue dans le logiciel de résolution de sudoku\n");
 	int Grille[9][9]={{0}};
-	L_Candidats  LC[9][9];
+	L_Candidats  LC[9][9]= {{NULL}};
 	L_Cases LO = NULL;
 	char lien[] = "res/g1.txt";
 

@@ -35,14 +35,14 @@ void affiche_liste_Candidats(L_Candidats L);
 
 /*
  * 	Ajout un élément dans la liste dans l'ordre croissant
- * 	@param L, la liste ou l'on ajoute l'élément
+ * 	@param *L, une pointeur sur la liste ou l'on ajoute l'élément
  * 	@param elt, l'élément à ajouter dans la liste
  */
-void ajout_element_Candidats(L_Candidats L, int elt);
+void ajout_element_Candidats( L_Candidats *L, int elt);
 
 /*
  * 	Supprime l'élément de la liste
- * 	@param L, la liste ou l'on veut supprimer un élément
+ * 	@param *L, un pointeur sur la liste ou l'on veut supprimer un élément
  * 	@param elt, l'élément a supprimer de la liste
  */
 void supprimer_element(L_Candidats L, int elt);

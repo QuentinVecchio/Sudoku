@@ -23,67 +23,69 @@ void affiche_liste_Candidats(L_Candidats L)
 	}
 }
 
-void ajout_element_Candidats(L_Candidats L, int elt)
+void ajout_element_Candidats( L_Candidats *L, int elt)
 {
-	if(L != NULL)
+	if((*L) == NULL)
 	{
-		// Pour la tête de liste, insertion en tête de liste
-		if(L->courant > elt)
+		(*L) = (L_Candidats) malloc(sizeof(Candidat));
+		(*L)->courant = elt;
+		(*L)->suivant = NULL;
+	}else{
+		L_Candidats i = (*L);
+		while(i->courant < elt && i->suivant) i = i->suivant;
+		
+		if(i == (*L))
 		{
-			L_Candidats tmp;
-			tmp = (L_Candidats) malloc(sizeof(Candidat));
-			tmp->suivant = L->suivant;
-			tmp->courant = L->courant;
-			L->courant = elt;
-			L->suivant = tmp;
+			if(i->courant > elt)
+			{
+				L_Candidats tmp = creer_liste(elt);
+				tmp->suivant = i;
+				(*L) = tmp;
+			}else{
+				L_Candidats tmp = creer_liste(elt);
+				tmp->suivant = i->suivant;
+				i->suivant = tmp;
+			}
 		}
 		else
 		{
-			if(L->suivant != NULL)
+			if(i->courant > elt)
 			{
-				// Si le suivant est plus grand, on insère avant
-				if(L->suivant->courant > elt)
-				{
-					L_Candidats tmp = creer_element(elt);
-					tmp->suivant = L->suivant;
-					L->suivant = tmp;
-				}
-				// Element suivant de la chaîne
-				else ajout_element_Candidats(L->suivant, elt);
+				L_Candidats tmp = creer_liste(i->courant);
+				i->courant = elt;
+				tmp->suivant = i->suivant;
+				i->suivant = tmp;
+			}else
+			{
+				L_Candidats tmp = creer_liste(elt);
+				i->suivant = tmp;
 			}
-			// Arrivé en fin de liste, on insère
-			else L->suivant = creer_element(elt);	
 		}
-	}
-	else
-	{
-		L = creer_element(elt);
 	}
 }
 
-void supprimer_element(L_Candidats L, int elt)
+void suppr_element_Candidats( L_Candidats *L, int elt)
 {
-	if(L != NULL)
+	if((*L) != NULL)
 	{
-		// Pour la tête de liste
-		if(L->courant == elt)
+		L_Candidats i = (*L);
+		while(i->courant != elt && i->suivant && i->suivant->courant != elt) i = i->suivant;
+		
+		if(i == (*L))
 		{
-			L_Candidats tmp = L->suivant;
-			L->courant = tmp->courant;
-			L->suivant = tmp->suivant;	
+			L_Candidats tmp = (*L);
+			(*L) = (*L)->suivant;
 			free(tmp);
 		}
-		else if(L->suivant != NULL)
+		else
 		{
-			//Si c'est élément suivant, on le supprime
-			if(L->suivant->courant == elt)
+			if(i && i->suivant)
 			{
-				L_Candidats tmp = L->suivant;
-				L->suivant = tmp->suivant;
+				printf("oui %d \n", i->courant);
+				L_Candidats tmp = i->suivant;
+				i->suivant = tmp->suivant;
 				free(tmp);
 			}
-			// test du prochain élément, si > elt alors l'elt a supprimer n'existe pas
-			else if(L->suivant->courant <= elt)	supprimer_element(L->suivant, elt);
 		}
 	}
 }

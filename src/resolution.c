@@ -63,7 +63,7 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 		{
 			if(appartient_liste(LC[Case.ligne][Case.colonne],chiffre))
 			{
-				supprimer_element(LC[i][Case.colonne],chiffre);
+				suppr_element_Candidats(LC[i][Case.colonne],chiffre);
 			}
 		}
 		//Suppression dans la colonne
@@ -71,7 +71,7 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 		{
                         if(appartient_liste(LC[Case.ligne][Case.colonne],chiffre))
 			{
-				supprimer_element(LC[Case.ligne][i],chiffre);
+				suppr_element_Candidats(LC[Case.ligne][i],chiffre);
 			}
                 }
 		//Suppression dans le carré et dans la case
@@ -81,7 +81,7 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 		{
 			while(y <= y+3)
 			{
-				supprimer_element(LC[x][y],chiffre);
+				suppr_element_Candidats(LC[x][y],chiffre);
 				y++;
 			}
 			y -=3;
