@@ -1,5 +1,5 @@
-#ifndef methodeResolutionH
-#define methodeResolutionH
+#ifndef METHODERESOLUTION_H
+#define METHODERESOLUTION_H
 /*
 	HEADER methodeResolotion
 

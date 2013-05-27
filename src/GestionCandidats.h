@@ -1,5 +1,5 @@
-#ifndef GestionCandidath
-#define GestionCandidath
+#ifndef GESTIONCANDIDAT_H
+#define GESTIONCANDIDAT_H
 
 /*
  * 	Gestion de la liste chaînée représentant les candidats d'un case donnée.

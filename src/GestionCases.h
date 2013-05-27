@@ -1,5 +1,5 @@
-#ifndef GestionCasesh
-#define GestionCasesh
+#ifndef GESTIONCASE_H
+#define GESTIONCASE_H
 /*
  *  Gestion des cases ouvertes sous forme de liste circulaire
  * 
