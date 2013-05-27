@@ -9,7 +9,6 @@
 #include <gtk/gtk.h>
 
 #include "gui_resoudre.h"
-#include "gui_options.h"
 #include "gui_credit.h"
 #include "gui_jeux.h"
 
@@ -20,7 +19,6 @@ int main (int argc, char **argv)
 	GtkWidget * labelTitre = NULL;
 	GtkWidget * btnJouer = NULL;
 	GtkWidget * btnResoudre = NULL;
-	GtkWidget * btnOption = NULL;
 	GtkWidget * btnCredit = NULL;
 	GtkWidget * btnQuitter = NULL;
 	gchar * labelResoudre = NULL;
@@ -57,11 +55,6 @@ int main (int argc, char **argv)
 	btnResoudre = gtk_button_new_with_mnemonic(labelResoudre);
 	g_signal_connect(G_OBJECT(btnResoudre),"clicked", G_CALLBACK(choisirFichier), NULL);
 	gtk_box_pack_start(GTK_BOX(boxVertical),btnResoudre,FALSE,FALSE,15);
-
-	//Initialisation du bouton Options
-	btnOption = gtk_button_new_with_mnemonic("_Options");
-	g_signal_connect(G_OBJECT(btnOption),"clicked", G_CALLBACK(options), NULL);
-	gtk_box_pack_start(GTK_BOX(boxVertical),btnOption,FALSE,FALSE,15);
 
 	//Initialisation du bouton Credit
 	labelCredit = g_locale_to_utf8("_Crédits",-1, NULL, NULL, NULL);//Permet de mettre un accent 
