@@ -1,8 +1,8 @@
 Sudoku : main.o GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o
 	gcc main.o GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o -o Sudoku
 	
-main.o :initialisation.o resolution.o GestionCandidats.o GestionCases.o affiche.o
-	gcc -c GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o tui/main.c 
+main.o :initialisation.o resolution.o GestionCandidats.o GestionCases.o affiche.o methodeResolution.o
+	gcc -c GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o methodeResolution.o tui/main.c 
 	
 initialisation.o : GestionCandidats.o GestionCases.o resolution.o
 	gcc  -c GestionCandidats.o GestionCases.o resolution.o  src/initialisation.c
@@ -19,6 +19,8 @@ GestionCandidats.o :
 GestionCases.o :
 	gcc -c  src/GestionCases.c 
 
+methodeResolution.o :
+	gcc -o src/methodeResolution.c
 
 
 #effacer les fichers '*.o'
