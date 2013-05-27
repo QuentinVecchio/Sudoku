@@ -1,5 +1,5 @@
-#ifndef DEF_CREDIT
-#define DEF_CREDIT
+#ifndef CREDIT_H
+#define CREDIT_H
 /*********************************************************************************************************************************************
 *       Partie graphique Credit Header                                                                                                       *
 *       Prototypes                                                                                                                           *

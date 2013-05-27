@@ -13,7 +13,7 @@
 
 #include "../src/GestionCandidats.h"
 #include "../src/GestionCases.h"
-#include "../src/initialisation.h"
+//#include "../src/initialisation.h"
 #include "gui_jeux.h"
 
 /*Variables gloables*/

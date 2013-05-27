@@ -1,5 +1,5 @@
-#ifndef DEF_JEUX
-#define DEF_JEUX
+#ifndef JEUX_H
+#define JEUX_H
 /*********************************************************************************************************************************************
 *       Partie graphique Jeux Header               	                                                                                     *
 *       Prototypes                                                                                                                           *

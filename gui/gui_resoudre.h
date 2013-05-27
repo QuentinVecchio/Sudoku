@@ -1,5 +1,5 @@
-#ifndef DEF_RESOUDRE
-#define DEF_RESOUDRE
+#ifndef RESOUDRE_H
+#define RESOUDRE_H
 /*********************************************************************************************************************************************
 *       Partie graphique Resoudre Header												     *
 *       Prototypes															     *

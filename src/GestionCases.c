@@ -66,8 +66,30 @@ void ajout_elt_case(L_Cases *L, T_Case elt)
 
 void enleve_elt_case(L_Cases *L, T_Case elt)
 {
+<<<<<<< local
 	L_Cases i = (*L)->suivant;
 	while(i != (*L) && est_inf(i->courant, elt)) 
+=======
+	if(L == NULL)
+	{
+		L = creer_liste(elt);
+	}
+	L_Cases i = L;
+	
+	while(i->suivant != L) i= i->suivant;
+	
+	L_Cases tmp = creer_liste(elt);
+	tmp->suivant = L;
+	i->suivant = tmp;
+
+}
+
+void eleve_element(L_Cases L, T_Case elt)
+{
+	L_Cases i = L;
+	
+	if(est_egal(L->courant, elt))
+>>>>>>> other
 	{
 		printf("parcours\n");
 		i = i->suivant;
