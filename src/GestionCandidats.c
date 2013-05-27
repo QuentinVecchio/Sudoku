@@ -50,11 +50,11 @@ void ajout_element_Candidats( L_Candidats *L, int elt)
 		{
 			if(i->courant > elt)
 			{
-				L_Candidats tmp = creer_liste(elt);
+				L_Candidats tmp = creer_element(elt);
 				tmp->suivant = i;
 				(*L) = tmp;
 			}else{
-				L_Candidats tmp = creer_liste(elt);
+				L_Candidats tmp = creer_element(elt);
 				tmp->suivant = i->suivant;
 				i->suivant = tmp;
 			}
@@ -63,13 +63,13 @@ void ajout_element_Candidats( L_Candidats *L, int elt)
 		{
 			if(i->courant > elt)
 			{
-				L_Candidats tmp = creer_liste(i->courant);
+				L_Candidats tmp = creer_element(i->courant);
 				i->courant = elt;
 				tmp->suivant = i->suivant;
 				i->suivant = tmp;
 			}else
 			{
-				L_Candidats tmp = creer_liste(elt);
+				L_Candidats tmp = creer_element(elt);
 				i->suivant = tmp;
 			}
 		}
@@ -128,3 +128,10 @@ int longueur_liste(L_Candidats L)
 
 	return l;
 }
+
+/*
+int main()
+{
+	printf("Bienvenue:\n");
+	return 1;
+}*/
