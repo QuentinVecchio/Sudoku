@@ -26,13 +26,13 @@ int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 	return 1;
 }
 
-int main(){
-	printf("Bienvenue !!!\n");
-	int Grille[9][9]={{0}};
-	L_Candidats  LC[9][9]= {{NULL}};
-	L_Cases LO = creer_liste_vide();
-	char lien[] = "../res/g1.txt";
-
-	Init_Data(LC, LO, Grille, lien);
-	Affiche_Grille(Grille);
-}
+// int main(){
+// 	printf("Bienvenue !!!\n");
+// 	int Grille[9][9]={{0}};
+// 	L_Candidats  LC[9][9]= {{NULL}};
+// 	L_Cases LO = creer_liste_vide();
+// 	char lien[] = "../res/g1.txt";
+// 
+// 	Init_Data(LC, LO, Grille, lien);
+// 	Affiche_Grille(Grille);
+// }
