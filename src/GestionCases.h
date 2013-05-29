@@ -67,5 +67,8 @@ int est_egal(T_Case a, T_Case b);
 
 int est_inf(T_Case a, T_Case b);
 
+int appartient_liste_case(L_Cases L, T_Case elt);
+
+L_Cases donne_prochaine_ligne(L_Cases L);
 #endif
 

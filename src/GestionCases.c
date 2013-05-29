@@ -90,3 +90,21 @@ int est_inf(T_Case a, T_Case b)
 {
         return a.ligne < b.ligne || (a.ligne == b.ligne && a.colonne < b.colonne);
 }
+
+int appartient_liste_case(L_Cases L, T_Case elt)
+{
+	if(!L) return 0;
+		L_Cases tmp = L->suivant;
+		
+		while(!est_egal(elt, tmp->courant) && tmp != L) tmp = tmp->suivant;
+		if(est_egal(elt, tmp->courant)) return 1;
+		else return 0;
+		
+}
+
+L_Cases donne_prochaine_ligne(L_Cases L)
+{
+	L_Cases tmp = L;
+	while(tmp && tmp->courant.ligne == L->courant.ligne) tmp = tmp->suivant;
+	return tmp;
+}

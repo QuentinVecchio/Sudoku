@@ -40,12 +40,7 @@ void affiche_liste_Candidats(L_Candidats L);
  */
 void ajout_element_Candidats( L_Candidats *L, int elt);
 
-/*
- * 	Supprime l'élément de la liste
- * 	@param *L, un pointeur sur la liste ou l'on veut supprimer un élément
- * 	@param elt, l'élément a supprimer de la liste
- */
-void supprimer_element(L_Candidats L, int elt);
+
 
 /*
  * 	Renvoit 1 si l'élément appartient à la liste, 0 sinon
@@ -55,6 +50,14 @@ void supprimer_element(L_Candidats L, int elt);
  * 	@return 0, si l'élément n'appartient pas à la liste
  */
 int appartient_liste(L_Candidats L, int elt);
+
+
+/*
+ * 	Supprime l'élément de la liste
+ * 	@param *L, un pointeur sur la liste ou l'on veut supprimer un élément
+ * 	@param elt, l'élément a supprimer de la liste
+ */
+void suppr_element_Candidats( L_Candidats *L, int elt);
 
 /*
  * 	Renvoit la longueur de la liste

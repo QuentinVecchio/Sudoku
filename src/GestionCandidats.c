@@ -46,6 +46,7 @@ void ajout_element_Candidats( L_Candidats *L, int elt)
 		L_Candidats i = (*L);
 		while(i->courant < elt && i->suivant) i = i->suivant;
 		
+		if(i->courant == elt) return;
 		if(i == (*L))
 		{
 			if(i->courant > elt)
@@ -83,17 +84,16 @@ void suppr_element_Candidats( L_Candidats *L, int elt)
 		L_Candidats i = (*L);
 		while(i->courant != elt && i->suivant && i->suivant->courant != elt) i = i->suivant;
 		
-		if(i == (*L))
+		if(i->courant == elt)
 		{
 			L_Candidats tmp = (*L);
 			(*L) = (*L)->suivant;
-			free(tmp);
+			free(tmp);	
 		}
 		else
 		{
 			if(i && i->suivant)
 			{
-				printf("oui %d \n", i->courant);
 				L_Candidats tmp = i->suivant;
 				i->suivant = tmp->suivant;
 				free(tmp);
@@ -110,6 +110,9 @@ int appartient_liste(L_Candidats L, int elt)
 		// si il existe un suivant et que l'élément est plus petit (si plus grand alors élément n'existe pas
 		else if(L->suivant != NULL && L->suivant->courant <= elt) return appartient_liste(L->suivant, elt);
 		else return 0;	
+	}else
+	{
+		return 0;
 	}
 }
 
