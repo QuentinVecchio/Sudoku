@@ -33,7 +33,7 @@ int main (int argc, char **argv)
 	fenetrePrincipale = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(fenetrePrincipale), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(fenetrePrincipale), "Sudoku");
-	gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),200,350);
+	gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),200,0);
 	g_signal_connect(G_OBJECT(fenetrePrincipale), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipale),"icon.png",NULL);
 
