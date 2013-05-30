@@ -4,13 +4,13 @@
 
 
 all : GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o methodeResolution.o main.o
-	gcc main.o -o Sudoku
+	gcc GestionCandidats.o GestionCases.o resolution.o initialisation.o affiche.o methodeResolution.o main.o -o Sudoku
 	
-main.o : tui/affiche.h src/methodeResolution.h
-	gcc resolution.o initialisation.o affiche.o methodeResolution.o tui/main.c -o main.o 
+main.o : src/GestionCandidats.h src/GestionCases.h src/initialisation.h src/resolution.h tui/affiche.h src/methodeResolution.h resolution.o
+	gcc -c tui/main.c -o main.o 
 
 methodeResolution.o : src/methodeResolution.c src/GestionCases.h src/GestionCandidats.h src/initialisation.h src/resolution.h
-	gcc -c src/methodeResolution.c GestionCases.o GestionCandidats.o -o methodeResolution.o
+	gcc -c src/methodeResolution.c -o methodeResolution.o
 	
 initialisation.o : src/initialisation.c src/GestionCandidats.h src/GestionCases.h src/resolution.h
 	gcc -c src/initialisation.c -o initialisation.o
