@@ -11,12 +11,13 @@
 
 #include "../src/GestionCandidats.h"
 #include "../src/GestionCases.h"
-//#include "../src/initialisation.h"
+#include "../src/initialisation.h"
 #include "gui_resoudre.h"
 
 /*Variables globales */
 GtkWidget * dialogBox = NULL;
 gchar * lienFichier = NULL;
+GtkWidget * zoneSaisi1 = NULL;
 /********************/
 void choisirFichier(GtkWidget *widget, gpointer data)
 {
@@ -27,7 +28,6 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         int grilleF[9][9] = {0};
 //Initialisation des variables
         GtkWidget * label1;
-        GtkWidget * zoneSaisi1;
         GtkWidget * btnEdit1;
         GtkWidget * hBox1;
 //Initialisation de la dialogBox
@@ -44,7 +44,6 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialogBox)->vbox), hBox1, TRUE, TRUE, 10);
 //Lancement de la dialogBox
         gtk_widget_show_all(GTK_DIALOG(dialogBox)->vbox);
-	gtk_entry_set_text(GTK_ENTRY(zoneSaisi1), lienFichier);
         switch(gtk_dialog_run(GTK_DIALOG(dialogBox)))
         {
                 case GTK_RESPONSE_OK :
@@ -62,6 +61,7 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         if(gtk_dialog_run (GTK_DIALOG(dialogBoxChoix)) == GTK_RESPONSE_ACCEPT)
         {
                 lienFichier = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialogBoxChoix));
+		gtk_entry_set_text(GTK_ENTRY(zoneSaisi1), lienFichier);
 		gtk_widget_destroy(dialogBoxChoix);
         }
         else
@@ -129,7 +129,7 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 			}
                         else
                        	{
-                                     	sprintf(nombreAffiche,"<span foreground=\"#FF0000\"><big><b>%d</b></big></span>",grille2[i][y]);
+                                     	sprintf(nombreAffiche,"<span foreground=\"#00FF00\"><big><b>%d</b></big></span>",grille2[i][y]);
 			}
 			labelChiffre[i][y] = gtk_label_new(nombreAffiche);
 			gtk_label_set_use_markup(GTK_LABEL(labelChiffre[i][y]),TRUE);
