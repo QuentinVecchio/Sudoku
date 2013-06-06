@@ -24,6 +24,8 @@ int grilleO[9][9] = {0};//Grille de l'ordinateur
 GtkWidget * editChiffre[9][9];
 pthread_t thread;
 GtkWidget * labelTemps = NULL;
+GtkWidget * fenetreFin = NULL;
+char lienFichierJ[] = "../res/g1.txt";
 /********************/
 
 //------------------------------//
@@ -35,8 +37,7 @@ void jouer(GtkWidget *widget, gpointer data)
 	t = time(NULL);
 //Initialisation des tableaux
 	int i,y;
-	char lienFichier[] = "../res/g1.txt";
-	lireGrille(grilleO,lienFichier);
+	lireGrille(grilleO,lienFichierJ);
 //Initialisation des chaines à afficher
 	char nombreAffiche[60];
 	char strNiveau[] = "Niveau 1";
@@ -61,13 +62,11 @@ void jouer(GtkWidget *widget, gpointer data)
         gtk_window_set_title(GTK_WINDOW(fenetrePrincipaleJeux), "Sudoku");
         gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipaleJeux),480,480);
         g_signal_connect(G_OBJECT(fenetrePrincipaleJeux), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
-        gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipaleJeux),"icon.png",NULL);
+	gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipaleJeux),"icon.png",NULL);
 	vBoxFenetre = gtk_vbox_new(FALSE,6);
 	gtk_container_add(GTK_CONTAINER(fenetrePrincipaleJeux),vBoxFenetre);
 //Initialisation de la partie Haut de la fenetre
         labelNiveau= gtk_label_new(strNiveau);
-	//labelTemps = gtk_label_new("<span foreground=\"#FF0000\"><big><b>00:00</b></big></span>");
-	//gtk_label_set_use_markup(GTK_LABEL(labelTemps),TRUE);
 	labelTemps = gtk_label_new("");
 	hBoxHaut = gtk_hbox_new(TRUE,0);
         gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,10);
@@ -109,7 +108,7 @@ void jouer(GtkWidget *widget, gpointer data)
         btnMenu = gtk_button_new_with_mnemonic("_Menu");
 	btnSoumettre = gtk_button_new_with_mnemonic("_Soumettre");
 	hBoxBas = gtk_hbox_new(TRUE, 30);
-        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(retourMenuJeux), NULL);
         g_signal_connect(G_OBJECT(btnSoumettre),"clicked", G_CALLBACK(fin), NULL);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,20);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnSoumettre,FALSE,FALSE,20);
@@ -128,12 +127,15 @@ void fin()
 //On tue le thread du compteur
         pthread_cancel(thread);
 //initialisation des variables
-	GtkWidget * fenetreFin = NULL;
         GtkWidget * label1 = NULL;
 	int i,y,continu = 1;
 	char nombreAffiche[60];
 	int grilleJ[9][9];//Grille du joueur
 	int grilleR[9][9] = {0};//Grille résolu
+	L_Candidats  LC[9][9]= {{NULL}};
+        L_Cases LO = creer_liste_vide();
+	Init_Data(LC, LO, grilleR, lienFichierJ);
+	int grille_simple=fermerGrille(grilleR, LO, LC);
 //Initialisation de grilleJ :: On recupere toutes les entrées dans les gtk_entry
 	for(i=0;i<9;i++)
         {
@@ -161,7 +163,7 @@ void fin()
 	}
 //Initialisation des widgets selon la valeur de continue, si con = 0 pas bon et si = 1 alors bon
         if(continu)
-		label1 = gtk_label_new("<span foreground=\"#00FF00\"><big><b>FELICITATION !! :)</b></big></span>");
+		label1 = gtk_label_new("<span foreground=\"#1C863B\"><big><b>FELICITATION !! :)</b></big></span>");
         else
 		label1 = gtk_label_new("<span foreground=\"#FF0000\"><big><b>DOMMAGE !!! :(</b></big></span>");
 //Initialisation d'un GtkRc pour le fond de la grille
@@ -203,8 +205,8 @@ void fin()
                         }
                         else
                         {
-                                        if(grilleJ[i][y] = grilleR[i][y])//Chiffre bien placé
-                                                sprintf(nombreAffiche,"<span foreground=\"#00FF00\"><big><b>%d</b></big></span>",grilleR[i][y]);
+                                        if(grilleJ[i][y] == grilleR[i][y])//Chiffre bien placé
+                                                sprintf(nombreAffiche,"<span foreground=\"#1C863B\"><big><b>%d</b></big></span>",grilleR[i][y]);
                                         else//Chiffre pas bien placé
                                                 sprintf(nombreAffiche,"<span foreground=\"#FF0000\"><big><b>%d</b></big></span>",grilleO[i][y]);
                         }
@@ -221,7 +223,7 @@ void fin()
         btnMenu = gtk_button_new_with_mnemonic("_Menu");
         btnQuitter = gtk_button_new_with_mnemonic("_Quitter");
         hBoxBas = gtk_hbox_new(TRUE, 30);
-        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(retourMenuJeux2), NULL);
         g_signal_connect(G_OBJECT(btnQuitter),"clicked", G_CALLBACK(gtk_main_quit), NULL);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,20);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnQuitter,FALSE,FALSE,20);
@@ -274,5 +276,21 @@ void* compteur(void *data)
 		if(tpsAvant>s)
 			tpsAvant = s;
 	}
+}
+
+//------------------------------------------------------------------------------//
+//	Fonction qui permet de retourner au menu depuis la fenetre jeux		//
+//------------------------------------------------------------------------------//
+void retourMenuJeux()
+{
+        gtk_widget_destroy(fenetrePrincipaleJeux);
+}
+
+//------------------------------------------------------------------------//
+//      Fonction qui permet de retourner au menu depuis la fenetre fin    //
+//------------------------------------------------------------------------//
+void retourMenuJeux2()
+{
+        gtk_widget_destroy(fenetreFin);
 }
 

@@ -12,10 +12,11 @@
 #include <string.h>
 int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 {
-	Affiche_Grille(grille);
+	//Affiche_Grille(grille);
 	L_Cases parcours=LO->suivant;
 	int res_Admet_Unique;
 	int colonne;
+/*	for(colonne = 0; colonne < 9; colonne++)*/
 	
 
 	int a_modifie =1;
@@ -88,11 +89,32 @@ resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
 			c = LC[L->courant.ligne][L->courant.colonne]; 
 			while(c->suivant && c->courant != valeur_courant) 
 			{
-				c = c->suivant;
-			}
-			c = c->suivant;
-		}while(c);
 
+				Ouvrir_Case(valeur_courant,grille,L->courant, LC,origine);
+				
+				c = LC[L->courant.ligne][L->courant.colonne]; 
+				while(c->suivant && c->courant != valeur_courant) 
+				{
+					c = c->suivant;
+				}
+// 				for(colonne = 0; colonne < 9; colonne++)
+// 				{
+// 					printf("###Affichage de la ligne %d colonne %d\n", l, colonne);
+// 					affiche_liste_Candidats(LC[l][colonne]);
+// 				}
+// 				printf("---------------------------------------------------------------------");
+// 				printf("---------------------------------------------------------------------");
+// 				printf("%d %d\n",valeur_courant, c->courant);
+
+				c = c->suivant;
+			}else{
+					//Fermer_Case
+// 					printf("€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€e€");
+					return res;
+			}
+		}while(c);
+// 		printf("Retour fin \n");
+		return 0;
 	}
 }
 

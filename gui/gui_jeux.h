@@ -10,4 +10,6 @@ void jouer(GtkWidget *widget, gpointer data);
 void fin();
 int fctCharChif(const gchar *str);
 void* compteur(void *data);
+void retourMenuJeux();
+void retourMenuJeux2();
 #endif

@@ -36,7 +36,7 @@ int main (int argc, char **argv)
 	gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),200,0);
 	g_signal_connect(G_OBJECT(fenetrePrincipale), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipale),"icon.png",NULL);
-
+	gtk_window_set_resizable (GTK_WINDOW(fenetrePrincipale), FALSE);
 	//Initialisation du box vertical
 	boxVertical = gtk_vbox_new(FALSE,0);
 

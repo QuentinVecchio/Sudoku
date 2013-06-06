@@ -8,24 +8,29 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <string.h>
+#include <time.h>
 
 #include "../src/GestionCandidats.h"
 #include "../src/GestionCases.h"
 #include "../src/initialisation.h"
+#include "../src/methodeResolution.h"
+#include "../tui/affiche.h"
 #include "gui_resoudre.h"
 
 /*Variables globales */
 GtkWidget * dialogBox = NULL;
+GtkWidget * fenetrePrincipaleResolution = NULL;
 gchar * lienFichier = NULL;
 GtkWidget * zoneSaisi1 = NULL;
 /********************/
 void choisirFichier(GtkWidget *widget, gpointer data)
 {
-//Initialisation des variables test
-        int Niveau = 1;
-        int tpsExecution = 30;
-        int grilleD[9][9] = {0};
-        int grilleF[9][9] = {0};
+//Initialisation des variables sudoku
+        int tps = time(NULL);
+        int grilleD[9][9] = {0};//Grille de depart
+        int grilleF[9][9] = {0};//Grille de fin
+	L_Candidats  LC[9][9]= {{NULL}};
+        L_Cases LO = creer_liste_vide();
 //Initialisation des variables
         GtkWidget * label1;
         GtkWidget * btnEdit1;
@@ -48,7 +53,28 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         {
                 case GTK_RESPONSE_OK :
 			lireGrille(grilleD,lienFichier);
-                	affiche(grilleD,grilleF,tpsExecution,Niveau);
+			Init_Data(LC, LO, grilleF, lienFichier);
+			int grille_simple=fermerGrille(grilleF, LO, LC);
+        		if (grille_simple)
+        		{
+                		affiche(grilleD,grilleF,tps-time(NULL),1);
+        		}
+        		else
+        		{
+                		int grille_possible=Backtrack(grilleF,LO,LC);
+                		if (grille_possible)
+					affiche(grilleD,grilleF,tps-time(NULL),2);
+                		else
+				{
+					GtkWidget * fenetreImpossible = NULL;
+					fenetreImpossible = gtk_message_dialog_new(GTK_WINDOW(dialogBox),GTK_DIALOG_MODAL,GTK_MESSAGE_ERROR,GTK_BUTTONS_OK,"Sudoku RESOLUTION impossible");
+					switch(gtk_dialog_run(GTK_DIALOG(fenetreImpossible)))
+					{
+						case GTK_RESPONSE_OK :
+							gtk_widget_destroy(fenetreImpossible);
+					}
+				}
+        		}
 	}
 }
 
@@ -68,7 +94,6 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         {
                 gtk_widget_destroy(dialogBoxChoix);
         }
-
 }
 
 void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
@@ -76,16 +101,15 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 	int i,y;
 //Destruction de la fenetre choix fichier
 	gtk_widget_destroy(dialogBox);
+//Initialisation d'un GtkRc pour le fond de la grille
+        gtk_rc_parse("./gtkrc.rc");
 //Initialisation des chaines à afficher
 	char nombreAffiche[60];
 	char strNiveau[20];
 	sprintf(strNiveau,"Niveau %d",niv);
 	char strTps[30];
 	sprintf(strTps,"Temps execution : %d ms",tps);
-//Initialisation d'un GtkRc pour le fond de la grille
-	gtk_rc_parse("./gtkrc.rc");
 //Initialisation variables fenetre
-	GtkWidget * fenetrePrincipale = NULL;
 	GtkWidget * vBoxFenetre = NULL;
 //Initialisation variables haut fenetre
 	GtkWidget * labelNiveau = NULL;
@@ -100,14 +124,14 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 	GtkWidget * btnQuitter = NULL;
 	GtkWidget * hBoxBas = NULL;
 //Initialisation de la fenetre Principale
-	fenetrePrincipale = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_position(GTK_WINDOW(fenetrePrincipale), GTK_WIN_POS_CENTER);
-        gtk_window_set_title(GTK_WINDOW(fenetrePrincipale), "Solution du sudoku");
-        gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipale),480,480);
-        g_signal_connect(G_OBJECT(fenetrePrincipale), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
-        gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipale),"icon.png",NULL);
+	fenetrePrincipaleResolution = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        gtk_window_set_position(GTK_WINDOW(fenetrePrincipaleResolution), GTK_WIN_POS_CENTER);
+        gtk_window_set_title(GTK_WINDOW(fenetrePrincipaleResolution), "Solution du sudoku");
+        gtk_window_set_default_size(GTK_WINDOW(fenetrePrincipaleResolution),480,480);
+        g_signal_connect(G_OBJECT(fenetrePrincipaleResolution), "delete-event", G_CALLBACK(gtk_main_quit), NULL);
+        gtk_window_set_icon_from_file(GTK_WINDOW(fenetrePrincipaleResolution),"icon.png",NULL);
 	vBoxFenetre = gtk_vbox_new(FALSE,8);
-	gtk_container_add(GTK_CONTAINER(fenetrePrincipale),vBoxFenetre);
+	gtk_container_add(GTK_CONTAINER(fenetrePrincipaleResolution),vBoxFenetre);
 //Initialisation de la partie Haut de la fenetre
         labelNiveau = gtk_label_new(strNiveau);
 	labelTemps = gtk_label_new(strTps);
@@ -129,7 +153,7 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 			}
                         else
                        	{
-                                     	sprintf(nombreAffiche,"<span foreground=\"#00FF00\"><big><b>%d</b></big></span>",grille2[i][y]);
+                                     	sprintf(nombreAffiche,"<span foreground=\"#1C863B\"><big><b>%d</b></big></span>",grille2[i][y]);
 			}
 			labelChiffre[i][y] = gtk_label_new(nombreAffiche);
 			gtk_label_set_use_markup(GTK_LABEL(labelChiffre[i][y]),TRUE);
@@ -144,12 +168,15 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
         btnMenu = gtk_button_new_with_mnemonic("_Menu");
 	btnQuitter = gtk_button_new_with_mnemonic("_Quitter");
 	hBoxBas = gtk_hbox_new(TRUE, 30);
-        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(gtk_main_quit), NULL);
+        g_signal_connect(G_OBJECT(btnMenu),"clicked", G_CALLBACK(retourMenu), NULL);
         g_signal_connect(G_OBJECT(btnQuitter),"clicked", G_CALLBACK(gtk_main_quit), NULL);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnMenu,FALSE,FALSE,20);
         gtk_box_pack_start(GTK_BOX(hBoxBas),btnQuitter,FALSE,FALSE,20);
 	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxBas,FALSE, FALSE,0);
 //Affichage
-        gtk_widget_show_all(fenetrePrincipale);
+        gtk_widget_show_all(fenetrePrincipaleResolution);
 }
-
+void retourMenu()
+{
+	gtk_widget_destroy(fenetrePrincipaleResolution);
+}
