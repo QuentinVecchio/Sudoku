@@ -147,6 +147,84 @@ void Ouvrir_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 			x++;
 		}
 	//Ajout de la valeur dans la grille
-
 	
 }
+
+
+int Admet_Unique(L_Candidats LC[9][9], T_Case Case)
+{
+	int res = 0;
+	L_Candidats c = LC[Case.ligne][Case.colonne];
+	if(c == NULL) return 0;
+	
+	res = Admet_Unique_liste(c);
+	if(res) return res;	
+
+
+	int i = 0;
+	int est_dans_colonne, est_dans_ligne, est_dans_carre;
+	int j = 0;
+	int limit_i, limit_j;
+	do{
+// 		printf("Test pour valeur %d\n",c->courant);
+		est_dans_carre = 0;
+		i = Case.ligne-Case.ligne%3;
+		limit_i = i;
+		j = Case.colonne-Case.colonne%3;
+		limit_j = j;
+		while(i < (limit_i+3))
+		{
+			while(j < (limit_j+3))
+			{
+				if(j == Case.colonne && i == Case.ligne)
+				{
+					j++;
+					continue;
+					
+				}
+// 				printf("Case courante %d %d: \n", i, j);
+// 				affiche_liste_Candidats(LC[i][j]);
+				if(appartient_liste(LC[i][j],c->courant)) est_dans_carre = 1;
+				j++;
+			}
+			j -=3;
+			i++;
+		}
+		if(!est_dans_carre)
+		{
+			return c->courant;
+		}
+		est_dans_colonne = 0;
+		est_dans_ligne = 0;
+		for(i = 0; i < 9; i++)
+		{
+			if(i != Case.ligne && appartient_liste(LC[i][Case.colonne],c->courant))
+			{
+// 				printf("Case %d %d\n", i, Case.colonne);
+				est_dans_colonne = 1;
+			}
+			if(i != Case.colonne && appartient_liste(LC[Case.ligne][i],c->courant))
+			{
+
+				est_dans_ligne = 1;
+			}
+		}
+
+		if(!est_dans_colonne)
+		{
+// 			printf("colonne\n");
+			return c->courant;
+			
+		}
+		if(!est_dans_ligne)
+		{
+// 			printf("ligne \n");
+			return c->courant;
+			
+		}
+		c= c->suivant;
+		
+	}while(c);	
+	return 0;
+}
+

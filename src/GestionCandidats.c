@@ -132,8 +132,9 @@ int longueur_liste(L_Candidats L)
 	return l;
 }
 
-int Admet_Unique(L_Candidats L)
+int Admet_Unique_liste(L_Candidats L)
 {
+	if(L == NULL) return 0;
 	if (L->suivant==NULL)return L->courant;
 	else return 0;
 	

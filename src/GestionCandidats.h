@@ -67,6 +67,7 @@ void suppr_element_Candidats( L_Candidats *L, int elt);
 int longueur_liste(L_Candidats L);
 
 
-int Admet_Unique(L_Candidats L);
+int Admet_Unique_liste(L_Candidats L);
+
 
 #endif

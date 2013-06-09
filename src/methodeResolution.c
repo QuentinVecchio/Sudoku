@@ -17,21 +17,30 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
         int res_Admet_Unique;
         int colonne;
         
-
+		
         int a_modifie =1;
         while (parcours!=parcours->suivant && a_modifie==1)
         {
-                printf("Boucle\n");
+			printf("Boucle\n\n");
                 a_modifie=0;
                 do
                 {
-                        res_Admet_Unique=Admet_Unique(LC[parcours->courant.ligne][parcours->courant.colonne]);  
+					printf("=> Case courante %d %d\n", parcours->courant.ligne, parcours->courant.colonne);
+					affiche_liste_Candidats(LC[parcours->courant.ligne][parcours->courant.colonne]);
+					//printf("=>Case %d %d\n", parcours->courant.ligne, parcours->courant.colonne);
+                       res_Admet_Unique=Admet_Unique(LC, parcours->courant);
+						
                         if (res_Admet_Unique!=0)
                         {
-                                Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
-                                enleve_elt_case(&LO,parcours->courant);
-                                grille[parcours->courant.ligne][parcours->courant.colonne] = res_Admet_Unique;
-                                a_modifie=1;
+							printf("Case %d %d, valeur %d\n", parcours->courant.ligne, parcours->courant.colonne, res_Admet_Unique);
+							Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
+							int v = 0;
+							*LC[parcours->courant.ligne, parcours->courant.colonne] = NULL;
+// 							for(v=0; v<10; v++)	suppr_element_Candidats(LC[parcours->courant.ligne, parcours->courant.colonne],v);
+							//suppr_element_Candidats(&LC[parcours->courant.ligne, parcours->courant.colonne],res_Admet_Unique);
+							enleve_elt_case(&LO,parcours->courant);
+							grille[parcours->courant.ligne][parcours->courant.colonne] = res_Admet_Unique;
+							a_modifie=1;
                         }
                 
                         parcours=parcours->suivant;
