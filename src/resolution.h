@@ -1,9 +1,11 @@
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
 /*
-	HEADER resolution.h
-	Quentin Vecchio
-	17 mai 2013
+ *	HEADER resolution.h
+ *	
+ *	@author Quentin Vecchio
+ *	@version 1.0.0
+ *	@date 11/06/2013
 */
 
 //Fonction qui indique si oui ou non un chiffre donné est candidat pour une case donné dans un sudoku

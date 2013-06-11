@@ -4,7 +4,8 @@
 /*
  * 	Initialisaton des listes et des tableaux
  * 
- * 	@author Cindy Binder Weissenbach Nicolas
+ * 	@author Cindy Binder, Nicolas Weissenbach
+ * 	@version 1.0.0
  * 	@date 14/05/2013
  */
 

@@ -4,8 +4,8 @@
  *  Gestion des cases ouvertes sous forme de liste circulaire
  * 
  * 	@author Mattthieu Clin
- * 	@version 1.0.1
- * 	@date 14/05/2013
+ * 	@version 1.0.0
+ * 	@date 10/06/2013
  * 
  */
 
