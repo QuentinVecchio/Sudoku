@@ -6,6 +6,7 @@
 #include "GestionCases.h"
 #include "GestionCandidats.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int Est_Candidat(int chiffre,T_Case Case , int grille[9][9])
 {
@@ -56,11 +57,28 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 	int i;//Index de parcours
 	int x;//Index de parcours colonne
 	int y;//Index de parcours ligne
+	int v;
+	L_Candidats tmp;
 	//Suppression du chiffre dans la listes de candidats des cases voisines et de la case
 		//Suppression dans la ligne
-		
-
-		
+		/*
+		if(longueur_liste(LC[Case.ligne][Case.colonne]) > 1)
+		{
+			
+			for(v=0; v<10; v++)	
+			{
+				if(!appartient_liste(LC[Case.ligne][Case.colonne], v)) 
+				{
+					tmp = LC[Case.ligne][Case.colonne];
+					LC[Case.ligne][Case.colonne] = LC[Case.ligne][Case.colonne]->suivant;
+					free(tmp);
+				}
+				
+			}
+			printf("L: %d\tC: %d:\t",Case.ligne, Case.colonne);
+			affiche_liste_Candidats(LC[Case.ligne][Case.colonne]);
+		}
+		*/
 		for(i=0;i<9;i++)
 		{
 			suppr_element_Candidats(&LC[i][Case.colonne],chiffre);

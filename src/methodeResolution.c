@@ -16,6 +16,10 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
         L_Cases parcours=LO->suivant;
         int res_Admet_Unique;
         int colonne;
+	/*
+	 /!\ variable pour le debuggage!!
+	 */
+	int i,j;
         
 		
         int a_modifie =1;
@@ -25,19 +29,21 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
                 a_modifie=0;
                 do
                 {
-					printf("=> Case courante %d %d\n", parcours->courant.ligne, parcours->courant.colonne);
-					affiche_liste_Candidats(LC[parcours->courant.ligne][parcours->courant.colonne]);
+					//for(i=0;i<9;i++) for(j=0;j<9;j++) {printf("%d %d\t", i,j); affiche_liste_Candidats(LC[i][j]);printf("\n");}
+					//printf("\n[+] Case courante ligne:%d colonne:%d\n\t", parcours->courant.ligne, parcours->courant.colonne);
+					//affiche_liste_Candidats(LC[parcours->courant.ligne][parcours->courant.colonne]);
 					//printf("=>Case %d %d\n", parcours->courant.ligne, parcours->courant.colonne);
                        res_Admet_Unique=Admet_Unique(LC, parcours->courant);
 						
                         if (res_Admet_Unique!=0)
                         {
-							printf("Case %d %d, valeur %d\n", parcours->courant.ligne, parcours->courant.colonne, res_Admet_Unique);
+							//printf("\tvaleur unique %d\n", res_Admet_Unique);
 							Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
-							int v = 0;
-							*LC[parcours->courant.ligne, parcours->courant.colonne] = NULL;
-// 							for(v=0; v<10; v++)	suppr_element_Candidats(LC[parcours->courant.ligne, parcours->courant.colonne],v);
-							//suppr_element_Candidats(&LC[parcours->courant.ligne, parcours->courant.colonne],res_Admet_Unique);
+//							int v = 0;
+							
+//							for(v=0; v<10; v++)	suppr_element_Candidats(LC[parcours->courant.ligne, parcours->courant.colonne],v);
+//							*LC[parcours->courant.ligne, parcours->courant.colonne] = NULL;
+//							suppr_element_Candidats(&LC[parcours->courant.ligne, parcours->courant.colonne],res_Admet_Unique);
 							enleve_elt_case(&LO,parcours->courant);
 							grille[parcours->courant.ligne][parcours->courant.colonne] = res_Admet_Unique;
 							a_modifie=1;
@@ -81,7 +87,9 @@ resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
                         memcpy(solution, grille, sizeof solution);
                 }
                 return;
-        }else{
+        }
+        else
+	{
                 L_Candidats c = LC[L->courant.ligne][L->courant.colonne];
                 int res;
                 int valeur_courant;
