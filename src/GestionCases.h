@@ -65,10 +65,19 @@ void enleve_elt_case(L_Cases *L, T_Case elt);
  */
 int est_egal(T_Case a, T_Case b);
 
+/*
+ * 	Compare deux cases, renvoit 1 si inferieur, 0 sinon
+ */
 int est_inf(T_Case a, T_Case b);
 
+/*
+ * 	renvoit 1 si 'elt' est dans la liste
+ */
 int appartient_liste_case(L_Cases L, T_Case elt);
 
+/*
+ * 	renvoit les cases de la ligne suivante
+ */
 L_Cases donne_prochaine_ligne(L_Cases L);
 #endif
 

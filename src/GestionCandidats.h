@@ -66,7 +66,11 @@ void suppr_element_Candidats( L_Candidats *L, int elt);
  */
 int longueur_liste(L_Candidats L);
 
-
+/*
+ * 	Renvoit la valeur contenu dans LC s'il n'y a qu'un seul element dans la liste, 0 sinon
+ * 	@param L, la liste dont on veut l'element
+ * 	@return int, le candidat unique de la liste
+ */
 int Admet_Unique_liste(L_Candidats L);
 
 
