@@ -3,6 +3,14 @@
 #include "../src/GestionCases.h"
 #include "../src/initialisation.h"
 #include "affiche.h"
+
+/*
+ * 	Fichier main, contient la fonction main
+ * 
+ * 	@author Cindy Binder, Matthieu Clin, Quentin Vecchio, Nicolas Weissenbach
+ * 	@date 12/06/2013
+ */
+
 int main()
 {
 	printf("Bienvenue dans le logiciel de résolution de sudoku\n");
