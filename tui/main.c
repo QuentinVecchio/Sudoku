@@ -8,6 +8,7 @@
  * 	Fichier main, contient la fonction main
  * 
  * 	@author Cindy Binder, Matthieu Clin, Quentin Vecchio, Nicolas Weissenbach
+ * 	@version 1.0.0
  * 	@date 12/06/2013
  */
 
