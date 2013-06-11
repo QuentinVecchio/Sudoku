@@ -106,14 +106,3 @@ resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
 }
 
 
-
-// int main(){
-//      printf("Bienvenue !!!\n");
-//      int Grille[9][9]={{0}};
-//      L_Candidats  LC[9][9]= {{NULL}};
-//      L_Cases LO = creer_liste_vide();
-//      char lien[] = "../res/g1.txt";
-// 
-//      Init_Data(LC, LO, Grille, lien);
-//      Affiche_Grille(Grille);
-// }

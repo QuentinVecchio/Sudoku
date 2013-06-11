@@ -32,7 +32,7 @@ void lireGrille(int Grille[9][9],char lien[])
  */
 void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 {
-	//SPECIFICATION
+	
 	
 	int ligne, colonne; //index de parcours du tableau 'LC'
 	

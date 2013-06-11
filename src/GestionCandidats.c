@@ -13,15 +13,6 @@ L_Candidats  creer_element(int elt)
 	return L;
 }
 
-// void affiche_liste_Candidats(L_Candidats L)
-// {
-// 	if(L != NULL)
-// 	{
-// 		printf("%d ", L->courant);
-// 		if(L->suivant != NULL)	affiche_liste_Candidats(L->suivant);
-// 		else printf("\n");
-// 	}
-// }
 
 void affiche_liste_Candidats(L_Candidats L)
 {
