@@ -1,6 +1,6 @@
 #ifndef GESTIONCASE_H
 #define GESTIONCASE_H
-/*
+/**
  *  Gestion des cases ouvertes sous forme de liste circulaire
  * 
  * 	@author Mattthieu Clin
@@ -25,58 +25,83 @@ typedef struct cases
 
 typedef Cases* L_Cases;
 
-/*
- * Creer une liste vide (null)
+/**
+ * 	Creer une liste vide (null)
+ * 	@return L_case, un liste de cases vide
  */
 L_Cases creer_liste_vide();
 
-/*
+/**
  * 	Permet de creer une liste contenant un élément
+ * 	@param elt, un element de type T_case
+ * 	@return L_Cases, une liste non vide contenant un seul element : 'elt'
  */
 L_Cases creer_liste(T_Case elt);
 
-/*
- *  Renvoit 1 si vide, 0 sinon
+/**
+ * 	Fonction verifie si la liste est vide ou non
+ * 	@param L, une liste de Cases
+ * 	@return int, 1 si vide, 0 sinon
  */
 int est_vide(L_Cases L);
 
 
-/*
- * 	Affiche les éléments de la liste
+/**
+ * 	fonction d'affichage des éléments de la liste
+ * 	@param L, la lsite de Cases
  */
 void affiche_liste_Case(L_Cases L);
 
-
+/**
+ * 	Affiche une liste a de la fin au début
+ * 	@param L, la liste de Cases
+ */
 void affiche_liste_case_reverse(L_Cases L);
 
 
-/*
+/**
  * 	Ajoute un élément en fin de liste
+ * 	@param *L, Liste de cases
+ * 	@param elt, element a ajouter dans la liste
  */
 void ajout_elt_case(L_Cases *L, T_Case elt);
 
-/*
+/**
  *	Enlève un élément de la liste
+ * 	@param *L, Liste de Cases
+ * 	@param elt, element a supprimer dans la liste
  */ 
 void enleve_elt_case(L_Cases *L, T_Case elt);
 
-/*
- * 	Compare deux cases, renvoit 1 si égal, 0 sinon
+/**
+ * 	Fonction qui verifie que 2 Listes de cases soient egaux
+ * 	@param a, Liste de Cases 1
+ * 	@param b, Liste de Cases 2
+ * 	@return int, 1 si les listes sont égaux, 0 sinon
  */
 int est_egal(T_Case a, T_Case b);
 
-/*
- * 	Compare deux cases, renvoit 1 si inferieur, 0 sinon
+/**
+ * 	Fonction qui verifie qu'une liste soit inferieur à l'autre
+ * 	@param a, Liste de Cases 1
+ * 	@param b, Liste de Cases 2
+ * 	@return int, 1 si la premiere est inferieur à la seconde, 0 sinon
+ * 	
  */
 int est_inf(T_Case a, T_Case b);
 
-/*
- * 	renvoit 1 si 'elt' est dans la liste
+/**
+ * 	Fonction qui verifie l'appartenance d'un element à la liste
+ * 	@param L, Liste de Cases
+ * 	@param elt, element à trouver
+ * 	@return int, 1 si l'element a ete trouvé, 0 sinon
  */
 int appartient_liste_case(L_Cases L, T_Case elt);
 
-/*
- * 	renvoit les cases de la ligne suivante
+/**
+ * 	Fonction renvoit les cases de la ligne suivante
+ * 	@param L, Liste des Cases
+ * 	@return L_Cases, renvoit une liste de la ligne suivante
  */
 L_Cases donne_prochaine_ligne(L_Cases L);
 #endif

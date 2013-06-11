@@ -4,7 +4,7 @@
 #include "../src/initialisation.h"
 #include "affiche.h"
 
-/*
+/**
  * 	Fichier main, contient la fonction main
  * 
  * 	@author Cindy Binder, Matthieu Clin, Quentin Vecchio, Nicolas Weissenbach

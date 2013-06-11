@@ -1,6 +1,6 @@
 #ifndef RESOLUTION_H
 #define RESOLUTION_H
-/*
+/**
  *	HEADER resolution.h
  *	
  *	@author Quentin Vecchio
@@ -14,7 +14,7 @@ int Est_Candidat(int chiffre,T_Case Case , int grille[9][9]);
 //Fonction qui attribue définitivement un chiffre à une case de la grille et élimine ce chiffre des listes de candidats des cases voisines.
 void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]);
 
-/*
+/**
  * 	Fonction qui réouvre une case fermé, utilisé uniquement pour la backtracking
  * 	@param chiffre,chiffre a mettre dans la case 'case'
  * 	@param grille, 
@@ -24,7 +24,7 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
  */
 void Ouvrir_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9], L_Cases LO);
 
-/*
+/**
  * 	Vérifie qui la case 'Case' ne contient qu'un seul candidats
  * 	@param LC, tableau de liste de candidats
  * 	@param Case, coordonné de la case a vérifier

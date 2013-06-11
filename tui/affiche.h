@@ -1,7 +1,7 @@
 // #ifndef afficheH
 // #define afficheH
 
-/*
+/**
  *	Fichier de gestion de l'affichage
  *	
  *	@author Cindy Binder
@@ -10,7 +10,7 @@
  */
 
 
-/*
+/**
  * 	Affichage de la grille
  * 	@param Grille, grille a afficher
  */
