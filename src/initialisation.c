@@ -19,7 +19,9 @@ void lireGrille(int Grille[9][9],char lien[])
 		
 	}
 	else
-	{printf("Le fichier n'existe pas");
+	{
+		printf("Le fichier n'existe pas\n");
+		exit(1);
 	}
 }
 

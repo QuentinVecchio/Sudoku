@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../src/GestionCandidats.h"
 #include "../src/GestionCases.h"
 #include "../src/initialisation.h"
@@ -21,17 +22,13 @@ int main()
 	int Grille[9][9]={{0}};
 	L_Candidats  LC[9][9]= {{NULL}};
 	L_Cases LO = creer_liste_vide();
-	char lien[] = "res/g2.txt";
+	char lien[20];
 	int nb;
 	int z;
 	double c;
 	
-	do
-	{
-		printf("entrez le numéro de la grille (1-9):\t");
-		z = scanf("%d", &nb);
-	}while(nb > 10 && nb < 0);
-	lien[5]=nb+48;
+
+	z=scanf("%s", lien);
 	printf("Vous avez choisis la grille : %s\n\n", lien);
 	
 	Init_Data(LC, LO, Grille, lien);
