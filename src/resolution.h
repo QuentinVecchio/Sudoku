@@ -8,10 +8,24 @@
  *	@date 11/06/2013
 */
 
-//Fonction qui indique si oui ou non un chiffre donné est candidat pour une case donné dans un sudoku
+
+/**
+ * 	Fonction qui indique si oui ou non un chiffre donné est candidat pour une case donné dans un sudoku
+ * 	@param chiffre, le chiffre a tester
+ * 	@param Case, les coordonnées dans la grille 'grille'
+ * 	@param grille, grille du sudoku
+ * 	@return 0 si le 'chiffre' n'est pas candidat, 1 sinon
+ */
 int Est_Candidat(int chiffre,T_Case Case , int grille[9][9]);
 
-//Fonction qui attribue définitivement un chiffre à une case de la grille et élimine ce chiffre des listes de candidats des cases voisines.
+/**
+ * 	Fonction qui attribue définitivement un chiffre à une case de la grille et élimine ce chiffre des listes de candidats des cases voisines.
+ * 	@param chiffre,le nombre a attribuer definitivement a la case
+ * 	@param grille, la grille du sudoku
+ * 	@param Case, les coordonnées dans les tableaux 'grille' et 'LC'
+ * 	@param LC, tableau de liste des candidats
+ */
+
 void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]);
 
 /**
