@@ -96,7 +96,6 @@ void resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
                         resoud(grille,origine, (L->suivant), LC);
 
                         Ouvrir_Case(valeur_courant,grille,L->courant, LC,origine);
-                        
                         c = LC[L->courant.ligne][L->courant.colonne]; 
                         while(c->suivant && c->courant != valeur_courant) 
                         {

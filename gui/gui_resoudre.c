@@ -57,13 +57,13 @@ void choisirFichier(GtkWidget *widget, gpointer data)
 			int grille_simple=fermerGrille(grilleF, LO, LC);
         		if (grille_simple)
         		{
-                		affiche(grilleD,grilleF,tps-time(NULL),1);
+                		affiche(grilleD,grilleF,tps-time(NULL),1,1);
         		}
         		else
         		{
                 		int grille_possible=Backtrack(grilleF,LO,LC);
                 		if (grille_possible)
-					affiche(grilleD,grilleF,tps-time(NULL),2);
+					affiche(grilleD,grilleF,tps-time(NULL),2,grille_possible);
                 		else
 				{
 					GtkWidget * fenetreImpossible = NULL;
@@ -72,6 +72,7 @@ void choisirFichier(GtkWidget *widget, gpointer data)
 					{
 						case GTK_RESPONSE_OK :
 							gtk_widget_destroy(fenetreImpossible);
+							gtk_widget_destroy(dialogBox);
 					}
 				}
         		}
@@ -96,7 +97,7 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         }
 }
 
-void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
+void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv,int nbSolution)
 {
 	int i,y;
 //Destruction de la fenetre choix fichier
@@ -109,11 +110,14 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 	sprintf(strNiveau,"Niveau %d",niv);
 	char strTps[30];
 	sprintf(strTps,"Temps execution : %d ms",tps);
+	char strSolution[15];
+	sprintf(strSolution,"%d Solution",nbSolution);
 //Initialisation variables fenetre
 	GtkWidget * vBoxFenetre = NULL;
 //Initialisation variables haut fenetre
 	GtkWidget * labelNiveau = NULL;
 	GtkWidget * labelTemps = NULL;
+	GtkWidget * labelSolution = NULL;
 	GtkWidget * hBoxHaut = NULL;
 //Initialisation variables milieu de fenetre
 	GtkWidget * labelChiffre[9][9];
@@ -134,10 +138,12 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv)
 	gtk_container_add(GTK_CONTAINER(fenetrePrincipaleResolution),vBoxFenetre);
 //Initialisation de la partie Haut de la fenetre
         labelNiveau = gtk_label_new(strNiveau);
+	labelSolution = gtk_label_new(strSolution);
 	labelTemps = gtk_label_new(strTps);
 	hBoxHaut = gtk_hbox_new(TRUE,0);
-        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,10);
-	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,10);
+        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,8);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelSolution,TRUE,TRUE,8);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,8);
 	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxHaut,FALSE, FALSE,10);
 //Initialisation de la partie du milieu de la fenetre
 	GtkWidget * alignement = gtk_alignment_new(0.55,0.55,0.1,0.1);
