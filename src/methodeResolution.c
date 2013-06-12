@@ -22,7 +22,6 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
         int a_modifie =1;
         while (parcours!=parcours->suivant && a_modifie==1)
         {
-			printf("Boucle\n\n");
                 a_modifie=0;
                 do
                 {
