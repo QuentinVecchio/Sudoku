@@ -5,6 +5,8 @@
 #include "affiche.h"
 #include "time.h"
 
+
+
 /**
  * 	Fichier main, contient la fonction main
  * 
@@ -54,6 +56,7 @@ int main()
 			printf("Il y a %d grilles possibles\n", grille_possible);
 			if(grille_possible == 1) printf("C'est une grille difficile !\n");
 			else printf("C'est une grille terrible !\n");
+			Affiche_Grille(Grille);
 		}else printf("Grille impossible\n");
 	}
 	

@@ -6,7 +6,7 @@
  * 
  * 	@author Cindy Binder, Nicolas Weissenbach
  * 	@version 1.0.0
- * 	@date 14/05/2013
+ * 	@date 9/06/2013
  */
 
 /**

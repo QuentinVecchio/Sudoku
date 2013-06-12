@@ -62,16 +62,15 @@ int solution[9][9];
 int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 {
         L_Cases tmp = LO->suivant;
-//         clock_t a,b;
-//         double c;
-//         a = clock();
-        resoud(grille, LO, tmp, LC);
-//         b = clock();
-//         c = (double)(b-a)/CLOCKS_PER_SEC;
-        Affiche_Grille(solution);
-//         printf("Temps écoulé :%2.3fs\n", c);
-        return nbr_solution;
 
+        resoud(grille, LO, tmp, LC);
+	int i,j;
+	for(i=0;i<9;i++)
+		for(j=0;j<9;j++)
+			grille[i][j] = solution[i][j];
+
+		
+        return nbr_solution;
 }
 
 void resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
