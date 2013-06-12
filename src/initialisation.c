@@ -6,9 +6,7 @@
 #include "initialisation.h"
 
 
-/*
- * une fonction qui retourne un tableau de valeur correspondant au fichier txt fourni
- */
+
 void lireGrille(int Grille[9][9],char lien[])
 {
 	FILE *f=NULL;
@@ -27,9 +25,6 @@ void lireGrille(int Grille[9][9],char lien[])
 
 
 
-/*
- * @param: LC est un tableau [9][9] qui contient soit NULL soit une liste de candidats
- */
 void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 {
 	

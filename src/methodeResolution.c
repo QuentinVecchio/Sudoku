@@ -16,10 +16,7 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
         L_Cases parcours=LO->suivant;
         int res_Admet_Unique;
         int colonne;
-	/*
-	 /!\ variable pour le debuggage!!
-	 */
-	int i,j;
+	int v;
         
 		
         int a_modifie =1;
@@ -29,38 +26,24 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
                 a_modifie=0;
                 do
                 {
-					//for(i=0;i<9;i++) for(j=0;j<9;j++) {printf("%d %d\t", i,j); affiche_liste_Candidats(LC[i][j]);printf("\n");}
-					//printf("\n[+] Case courante ligne:%d colonne:%d\n\t", parcours->courant.ligne, parcours->courant.colonne);
-					//affiche_liste_Candidats(LC[parcours->courant.ligne][parcours->courant.colonne]);
-					//printf("=>Case %d %d\n", parcours->courant.ligne, parcours->courant.colonne);
                        res_Admet_Unique=Admet_Unique(LC, parcours->courant);
 						
                         if (res_Admet_Unique!=0)
                         {
-				int v;
-							//printf("\tvaleur unique %d\n", res_Admet_Unique);
-							Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
-//							int v = 0;
-							if(longueur_liste(LC[parcours->courant.ligne][parcours->courant.colonne]) > 0)
-							{
+				Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
 
-								for(v=1; v<10; v++)	
-								{
-								//if(!appartient_liste(LC[Case.ligne][Case.colonne], v)) 
-								//{
-								suppr_element_Candidats( &LC[parcours->courant.ligne][parcours->courant.colonne], v);
-								//}
+				if(longueur_liste(LC[parcours->courant.ligne][parcours->courant.colonne]) > 0)
+				{
 
-								}
-// 							printf("L: %d\tC: %d:\t",Case.ligne, Case.colonne);
-// 							affiche_liste_Candidats(LC[Case.ligne][Case.colonne]);
-							}
-//							for(v=0; v<10; v++)	suppr_element_Candidats(LC[parcours->courant.ligne, parcours->courant.colonne],v);
-//							*LC[parcours->courant.ligne, parcours->courant.colonne] = NULL;
-//							suppr_element_Candidats(&LC[parcours->courant.ligne, parcours->courant.colonne],res_Admet_Unique);
-							enleve_elt_case(&LO,parcours->courant);
-							grille[parcours->courant.ligne][parcours->courant.colonne] = res_Admet_Unique;
-							a_modifie=1;
+					for(v=1; v<10; v++)	
+					{
+						suppr_element_Candidats( &LC[parcours->courant.ligne][parcours->courant.colonne], v);
+					}
+
+				}
+				enleve_elt_case(&LO,parcours->courant);
+				grille[parcours->courant.ligne][parcours->courant.colonne] = res_Admet_Unique;
+				a_modifie=1;
                         }
                 
                         parcours=parcours->suivant;
