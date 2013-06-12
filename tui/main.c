@@ -19,7 +19,14 @@ int main()
 	L_Candidats  LC[9][9]= {{NULL}};
 	L_Cases LO = creer_liste_vide();
 	char lien[] = "res/g2.txt";
-
+	int nb;
+	do
+	{
+		printf("entrez le numéro de la grille (1-9):\t");
+		scanf("%d", &nb);
+	}while(nb > 10 && nb < 0);
+	lien[5]=nb+48;
+	printf("%s", lien);
 	Init_Data(LC, LO, Grille, lien);
 	int grille_simple=fermerGrille(Grille, LO, LC);
 	if (grille_simple)
