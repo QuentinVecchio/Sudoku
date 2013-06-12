@@ -18,7 +18,7 @@ int main()
 	int Grille[9][9]={{0}};
 	L_Candidats  LC[9][9]= {{NULL}};
 	L_Cases LO = creer_liste_vide();
-	char lien[] = "res/g2.txt";
+	char lien[] = "res/g8.txt";
 
 	Init_Data(LC, LO, Grille, lien);
 	int grille_simple=fermerGrille(Grille, LO, LC);

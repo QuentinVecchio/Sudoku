@@ -37,10 +37,24 @@ int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 						
                         if (res_Admet_Unique!=0)
                         {
+				int v;
 							//printf("\tvaleur unique %d\n", res_Admet_Unique);
 							Fermer_Case(res_Admet_Unique,grille,parcours->courant,LC);
 //							int v = 0;
-							
+							if(longueur_liste(LC[parcours->courant.ligne][parcours->courant.colonne]) > 0)
+							{
+
+								for(v=1; v<10; v++)	
+								{
+								//if(!appartient_liste(LC[Case.ligne][Case.colonne], v)) 
+								//{
+								suppr_element_Candidats( &LC[parcours->courant.ligne][parcours->courant.colonne], v);
+								//}
+
+								}
+// 							printf("L: %d\tC: %d:\t",Case.ligne, Case.colonne);
+// 							affiche_liste_Candidats(LC[Case.ligne][Case.colonne]);
+							}
 //							for(v=0; v<10; v++)	suppr_element_Candidats(LC[parcours->courant.ligne, parcours->courant.colonne],v);
 //							*LC[parcours->courant.ligne, parcours->courant.colonne] = NULL;
 //							suppr_element_Candidats(&LC[parcours->courant.ligne, parcours->courant.colonne],res_Admet_Unique);

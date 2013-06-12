@@ -61,24 +61,22 @@ void Fermer_Case(int chiffre, int grille[9][9],T_Case Case, L_Candidats LC[9][9]
 	L_Candidats tmp;
 	//Suppression du chiffre dans la listes de candidats des cases voisines et de la case
 		//Suppression dans la ligne
-		/*
-		if(longueur_liste(LC[Case.ligne][Case.colonne]) > 1)
-		{
-			
-			for(v=0; v<10; v++)	
-			{
-				if(!appartient_liste(LC[Case.ligne][Case.colonne], v)) 
-				{
-					tmp = LC[Case.ligne][Case.colonne];
-					LC[Case.ligne][Case.colonne] = LC[Case.ligne][Case.colonne]->suivant;
-					free(tmp);
-				}
-				
-			}
-			printf("L: %d\tC: %d:\t",Case.ligne, Case.colonne);
-			affiche_liste_Candidats(LC[Case.ligne][Case.colonne]);
-		}
-		*/
+		
+// 		if(longueur_liste(LC[Case.ligne][Case.colonne]) > 0)
+// 		{
+// 			
+// 			for(v=1; v<10; v++)	
+// 			{
+// 				//if(!appartient_liste(LC[Case.ligne][Case.colonne], v)) 
+// 				//{
+// 					suppr_element_Candidats( &LC[Case.ligne][Case.colonne], v);
+// 				//}
+// 				
+// 			}
+// 			printf("L: %d\tC: %d:\t",Case.ligne, Case.colonne);
+// 			affiche_liste_Candidats(LC[Case.ligne][Case.colonne]);
+// 		}
+		
 		for(i=0;i<9;i++)
 		{
 			suppr_element_Candidats(&LC[i][Case.colonne],chiffre);
