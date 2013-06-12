@@ -7,7 +7,7 @@
 
 #include "methodeResolution.h"
 #include "../tui/affiche.h"
-#include "time.h"
+// #include "time.h"
 #include <stdlib.h>
 #include <string.h>
 int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
@@ -62,14 +62,14 @@ int solution[9][9];
 int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 {
         L_Cases tmp = LO->suivant;
-        clock_t a,b;
-        double c;
-        a = clock();
+//         clock_t a,b;
+//         double c;
+//         a = clock();
         resoud(grille, LO, tmp, LC);
-        b = clock();
-        c = (double)(b-a)/CLOCKS_PER_SEC;
+//         b = clock();
+//         c = (double)(b-a)/CLOCKS_PER_SEC;
         Affiche_Grille(solution);
-        printf("Temps écoulé :%2.5f\n", c);
+//         printf("Temps écoulé :%2.3fs\n", c);
         return nbr_solution;
 
 }
