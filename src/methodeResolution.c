@@ -74,7 +74,7 @@ int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 
 }
 
-resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
+void resoud(int grille[9][9], L_Cases origine, L_Cases L, L_Candidats LC[9][9])
 {
         if(L == origine) {
                 nbr_solution++;
