@@ -208,7 +208,7 @@ void fin()
                                         if(grilleJ[i][y] == grilleR[i][y])//Chiffre bien placé
                                                 sprintf(nombreAffiche,"<span foreground=\"#1C863B\"><big><b>%d</b></big></span>",grilleR[i][y]);
                                         else//Chiffre pas bien placé
-                                                sprintf(nombreAffiche,"<span foreground=\"#FF0000\"><big><b>%d</b></big></span>",grilleO[i][y]);
+                                                sprintf(nombreAffiche,"<span foreground=\"#FF0000\"><big><b>%d</b></big></span>",grilleR[i][y]);
                         }
                         labelChiffre[i][y] = gtk_label_new(nombreAffiche);
                         gtk_label_set_use_markup(GTK_LABEL(labelChiffre[i][y]),TRUE);

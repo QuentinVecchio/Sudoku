@@ -26,8 +26,8 @@ GtkWidget * zoneSaisi1 = NULL;
 void choisirFichier(GtkWidget *widget, gpointer data)
 {
 //Initialisation des variables sudoku
-        int tps = time(NULL);
-        int grilleD[9][9] = {0};//Grille de depart
+        int tps = 0;
+	int grilleD[9][9] = {0};//Grille de depart
         int grilleF[9][9] = {0};//Grille de fin
 	L_Candidats  LC[9][9]= {{NULL}};
         L_Cases LO = creer_liste_vide();
@@ -52,18 +52,21 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         switch(gtk_dialog_run(GTK_DIALOG(dialogBox)))
         {
                 case GTK_RESPONSE_OK :
+			tps = clock();
 			lireGrille(grilleD,lienFichier);
 			Init_Data(LC, LO, grilleF, lienFichier);
 			int grille_simple=fermerGrille(grilleF, LO, LC);
         		if (grille_simple)
         		{
-                		affiche(grilleD,grilleF,tps-time(NULL),1,1);
+                		affiche(grilleD,grilleF,(float) (clock()-tps),1,1);
         		}
         		else
         		{
                 		int grille_possible=Backtrack(grilleF,LO,LC);
-                		if (grille_possible)
-					affiche(grilleD,grilleF,tps-time(NULL),2,grille_possible);
+                		if (grille_possible>1)
+					affiche(grilleD,grilleF,(float) (clock()-tps),3,grille_possible);
+				else if (grille_possible == 1)
+					affiche(grilleD,grilleF,(float) (clock()-tps),2,grille_possible);
                 		else
 				{
 					GtkWidget * fenetreImpossible = NULL;
@@ -97,7 +100,7 @@ void dialogBoxChoixFichier(GtkWidget *widget, gpointer data)
         }
 }
 
-void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv,int nbSolution)
+void affiche(int grille1[9][9], int grille2[9][9], float tps, int niv,int nbSolution)
 {
 	int i,y;
 //Destruction de la fenetre choix fichier
@@ -107,9 +110,10 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv,int nbSoluti
 //Initialisation des chaines à afficher
 	char nombreAffiche[60];
 	char strNiveau[20];
-	sprintf(strNiveau,"Niveau %d",niv);
+	sprintf(strNiveau,"Nv %d",niv);
 	char strTps[30];
-	sprintf(strTps,"Temps execution : %d ms",tps);
+	tps /= 1000000;
+	sprintf(strTps,"Tps : %2.4f s",tps);
 	char strSolution[15];
 	sprintf(strSolution,"%d Solution",nbSolution);
 //Initialisation variables fenetre
@@ -141,9 +145,9 @@ void affiche(int grille1[9][9], int grille2[9][9], int tps, int niv,int nbSoluti
 	labelSolution = gtk_label_new(strSolution);
 	labelTemps = gtk_label_new(strTps);
 	hBoxHaut = gtk_hbox_new(TRUE,0);
-        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,8);
-	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelSolution,TRUE,TRUE,8);
-	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,8);
+        gtk_box_pack_start(GTK_BOX(hBoxHaut),labelNiveau,TRUE,TRUE,4);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelSolution,TRUE,TRUE,4);
+	gtk_box_pack_start(GTK_BOX(hBoxHaut),labelTemps,TRUE,TRUE,4);
 	gtk_box_pack_start(GTK_BOX(vBoxFenetre),hBoxHaut,FALSE, FALSE,10);
 //Initialisation de la partie du milieu de la fenetre
 	GtkWidget * alignement = gtk_alignment_new(0.55,0.55,0.1,0.1);
