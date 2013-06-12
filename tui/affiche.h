@@ -1,5 +1,5 @@
-// #ifndef afficheH
-// #define afficheH
+#ifndef afficheH
+#define afficheH
 
 /**
  *	Fichier de gestion de l'affichage
@@ -16,4 +16,4 @@
  */
 void Affiche_Grille(int Grille[9][9]);
 
-// #endif
+#endif

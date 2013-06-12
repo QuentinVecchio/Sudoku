@@ -6,8 +6,6 @@
 #include "initialisation.h"
 
 #include "methodeResolution.h"
-#include "../tui/affiche.h"
-// #include "time.h"
 #include <stdlib.h>
 #include <string.h>
 int fermerGrille(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
@@ -68,8 +66,6 @@ int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 	for(i=0;i<9;i++)
 		for(j=0;j<9;j++)
 			grille[i][j] = solution[i][j];
-
-		
         return nbr_solution;
 }
 

@@ -35,23 +35,7 @@ void Init_Data(L_Candidats  LC[9][9], L_Cases LO, int Grille[9][9],char lien[] )
 	int nb; //varis de 1 à 9 pour remplire la liste des candidats dans le tableau LC
 	
 	int possible = 0; //booleen qui défini si 'nb' est un candidat possible pour la case LC[][]
-	
 
-	
-	
-	//CORPS
-	
-	/*lireGrille(Grille,"../res/g1.txt");
-	Affiche_Grille(Grille);
-	 * on ferme les cases qui sont dans le fichier txt	lireGrille(Grille,"../res/g1.txt");
-	 * et on leur attribut NULL 
-	 */
-	
-	/*
-	 * on ouvre les cases qui ne sont pas dans le fichier txt
-	 * on attribut a la case un pointeur sur la liste des candidats de la case
-	 */
-	
 	//Initialisation da la variable Init avec la fonction lireGrille
 	lireGrille(Grille,lien);
 	
