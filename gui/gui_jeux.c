@@ -25,7 +25,7 @@ GtkWidget * editChiffre[9][9];
 pthread_t thread;
 GtkWidget * labelTemps = NULL;
 GtkWidget * fenetreFin = NULL;
-char lienFichierJ[] = "../res/g1.txt";
+char lienFichierJ[30];
 /********************/
 
 //------------------------------//
@@ -33,6 +33,10 @@ char lienFichierJ[] = "../res/g1.txt";
 //------------------------------//
 void jouer(GtkWidget *widget, gpointer data)
 {
+//Choix de la grille
+	srand(time(NULL));
+	int numGrille = (rand()%6)+1;
+	sprintf(lienFichierJ,"res/g%d.txt",numGrille);
 //Initialisation du tps de debut
 	t = time(NULL);
 //Initialisation des tableaux
@@ -283,6 +287,7 @@ void* compteur(void *data)
 //------------------------------------------------------------------------------//
 void retourMenuJeux()
 {
+	pthread_cancel(thread);
         gtk_widget_destroy(fenetrePrincipaleJeux);
 }
 
