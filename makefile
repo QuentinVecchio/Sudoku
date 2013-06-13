@@ -8,7 +8,7 @@ tui : copie dist/GestionCandidats.o dist/GestionCases.o dist/resolution.o dist/i
 	gcc -O3 dist/GestionCandidats.o dist/GestionCases.o dist/resolution.o dist/initialisation.o dist/affiche.o dist/methodeResolution.o dist/main.o -o dist/Sudoku_tui
 	
 gui : copie dist/gui_main.o dist/gui_jeux.o dist/gui_resoudre.o dist/gui_credit.o dist/initialisation.o dist/GestionCandidats.o dist/GestionCases.o dist/resolution.o dist/methodeResolution.o dist/affiche.o
-		gcc -O3 dist/gui_main.o dist/gui_resoudre.o  dist/gui_credit.o dist/gui_jeux.o initialisation.o GestionCandidats.o GestionCases.o resolution.o methodeResolution.o affiche.o -o dist/Sudoku_gui `pkg-config --cflags --libs gtk+-2.0` -lpthread
+		gcc -O3 dist/gui_main.o dist/gui_resoudre.o  dist/gui_credit.o dist/gui_jeux.o dist/initialisation.o dist/GestionCandidats.o dist/GestionCases.o dist/resolution.o dist/methodeResolution.o dist/affiche.o -o dist/Sudoku_gui `pkg-config --cflags --libs gtk+-2.0` -lpthread
 
 #CIBLE CONSOLE
 dist/main.o : src/GestionCandidats.h src/GestionCases.h src/initialisation.h src/resolution.h tui/affiche.h src/methodeResolution.h dist/resolution.o
@@ -61,4 +61,4 @@ clean :
 	
 #efface les fichier '*.o' plus l'executable 'Sudoku'
 reset : clean
-	rm -rf Sudoku_tui && rm -rf dist/Sudoku_gui
+	rm -rf dist/Sudoku_tui && rm -rf dist/Sudoku_gui

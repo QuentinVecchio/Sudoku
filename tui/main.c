@@ -27,7 +27,7 @@ int main()
 	int z;
 	double c;
 	
-
+	printf("nom du fichier contenant la Grille de sudoku :\t");
 	z=scanf("%s", lien);
 	printf("Vous avez choisis la grille : %s\n\n", lien);
 	
