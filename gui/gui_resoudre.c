@@ -22,6 +22,7 @@ GtkWidget * dialogBox = NULL;
 GtkWidget * fenetrePrincipaleResolution = NULL;
 gchar * lienFichier = NULL;
 GtkWidget * zoneSaisi1 = NULL;
+int grille_possible;
 /********************/
 void choisirFichier(GtkWidget *widget, gpointer data)
 {
@@ -62,7 +63,8 @@ void choisirFichier(GtkWidget *widget, gpointer data)
         		}
         		else
         		{
-                		int grille_possible=Backtrack(grilleF,LO,LC);
+				grille_possible=0;
+                		grille_possible=Backtrack(grilleF,LO,LC);
                 		if (grille_possible>1)
 					affiche(grilleD,grilleF,(float) (clock()-tps),3,grille_possible);
 				else if (grille_possible == 1)

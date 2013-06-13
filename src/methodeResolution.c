@@ -61,6 +61,7 @@ int Backtrack(int grille[9][9], L_Cases LO, L_Candidats LC[9][9])
 {
         L_Cases tmp = LO->suivant;
 
+	nbr_solution = 0;
         resoud(grille, LO, tmp, LC);
 	int i,j;
 	for(i=0;i<9;i++)
